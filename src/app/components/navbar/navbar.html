@@ -1,28 +1,11 @@
 <nav class="glass-effect navbar-white-rect z-40 w-full lg:block border border-gray-200 mx-auto max-w-[1450px]"
   [ngClass]="{ hidden: !isMobileMenuOpen }" (click)="$event.stopPropagation()">
   <style>
-    .fade-in {
-      animation: fadeInNavbarDropdown 0.2s ease;
-    }
-
-    @keyframes fadeInNavbarDropdown {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     .navbar-active-blue,
     .navbar-hover-blue:hover {
-      background-color: #0560FF !important;
+      background-color: #0560ff !important;
       color: #fff !important;
       border-radius: 0.75rem !important;
-      /* rounded-xl */
     }
 
     .navbar-active-blue i,
@@ -32,20 +15,14 @@
       color: #fff !important;
     }
 
-    /* Only make the navbar button icon white on hover/active, not dropdown icons */
+    /* Prevent dropdown menu icons from turning white */
+    .navbar-hover-blue .glass-effect i,
+    .navbar-active-blue .glass-effect i {
+      color: inherit !important;
+    }
+
     .navbar-hover-blue:hover>button>svg,
-    .navbar-active-blue>button>svg {
-      filter: none !important;
-      color: white !important;
-      fill: white !important;
-    }
-
-    .navbar-hover-blue:hover>button>svg path,
-    .navbar-active-blue>button>svg path {
-      fill: white !important;
-    }
-
-    /* For direct <a> links like Dashboard */
+    .navbar-active-blue>button>svg,
     .navbar-hover-blue:hover>svg,
     .navbar-active-blue>svg {
       filter: none !important;
@@ -53,6 +30,8 @@
       fill: white !important;
     }
 
+    .navbar-hover-blue:hover>button>svg path,
+    .navbar-active-blue>button>svg path,
     .navbar-hover-blue:hover>svg path,
     .navbar-active-blue>svg path {
       fill: white !important;
@@ -61,7 +40,7 @@
     .navbar-white-rect {
       background: #fff !important;
       border-radius: 1rem !important;
-      box-shadow: 0px 2px 15px 0px rgba(0, 56, 255, 0.10) !important;
+      box-shadow: 0px 2px 15px 0px rgba(0, 56, 255, 0.1) !important;
     }
   </style>
   <div class="w-full px-[25px] lg:py-2">
@@ -71,7 +50,7 @@
         <!-- Dashboard -->
         <a routerLink="/dashboard" routerLinkActive="navbar-active-blue"
           class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 card-hover navbar-hover-blue">
-          <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+          <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <defs>
               <linearGradient id="dashboard-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -89,7 +68,7 @@
           (mouseenter)="mouseEnter('visitor-registration')" (mouseleave)="mouseLeave()">
           <button (click)="toggleDropdown('visitor-registration')"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 w-full text-left card-hover">
-            <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
               <defs>
                 <linearGradient id="visitor-registration-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -112,29 +91,14 @@
             <span class="navbar-font">Visitor Registration</span>
           </button>
           <div *ngIf="openDropdown === 'visitor-registration'"
-            class="absolute z-20 mt-2 w-64 glass-effect rounded-xl shadow-xl py-2 fade-in">
+            class="absolute z-20 mt-2 w-64 glass-effect rounded-xl shadow-xl py-2">
             <a routerLink="/visitor-registration/register"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                class="w-3.5 h-3.5 mr-3 inline align-middle">
-                <path fill="#000"
-                  d="m362.7 19.3l-48.4 48.4l130 130l48.4-48.4c25-25 25-65.5 0-90.5l-39.4-39.5c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2c-2.5 8.5-.2 17.6 6 23.8s15.3 8.5 23.7 6.1L151 475.7c14.1-4.2 27-11.8 37.4-22.2l233.3-233.2z" />
-              </svg>Registration
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-edit w-4 mr-3 text-blue-500"></i>Registration
             </a>
-            <!-- <a routerLink="/visitor-registration/gate-pass" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200">
-              <i class="fas fa-ticket-alt w-4 mr-3 text-green-500"></i>Gate Pass (No Appointment)
-            </a> -->
             <a routerLink="/visitor-registration/backside"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
-                class="inline align-middle w-4 h-4 mr-3">
-                <g fill="none" fill-rule="evenodd">
-                  <path
-                    d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
-                  <path fill="#000"
-                    d="M2.614 5.426A1.5 1.5 0 0 1 4 4.5h10a7.5 7.5 0 1 1 0 15H5a1.5 1.5 0 0 1 0-3h9a4.5 4.5 0 1 0 0-9H7.621l.94.94a1.5 1.5 0 0 1-2.122 2.12l-3.5-3.5a1.5 1.5 0 0 1-.325-1.634" />
-                </g>
-              </svg>Backside
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-undo w-4 mr-3 text-green-500"></i>Backside
             </a>
           </div>
         </div>
@@ -144,7 +108,7 @@
           (mouseenter)="mouseEnter('appointment')" (mouseleave)="mouseLeave()">
           <button (click)="toggleDropdown('appointment')"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 w-full text-left card-hover">
-            <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <defs>
                 <linearGradient id="appointment-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -158,34 +122,24 @@
             <span class="navbar-font">Appointment</span>
           </button>
           <div *ngIf="openDropdown === 'appointment'"
-            class="absolute z-20 mt-2 w-64 glass-effect rounded-xl shadow-xl py-2 fade-in">
+            class="absolute z-20 mt-2 w-64 glass-effect rounded-xl shadow-xl py-2">
             <a routerLink="/appointment/schedule"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 mr-3 inline align-middle">
-                <path fill="#000"
-                  d="M13 11.6V8q0-.425-.288-.712T12 7t-.712.288T11 8v3.975q0 .2.075.388t.225.337l3.3 3.3q.275.275.7.275T16 16t.275-.7t-.275-.7zM12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
-              </svg>Schedule Appointment
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-clock w-4 mr-3 text-blue-500"></i>Schedule Appointment
             </a>
             <a routerLink="/appointment/view"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="2 6 20 12" class="w-4 h-4 mr-3 inline align-middle">
-                <path fill="#000" fill-rule="evenodd"
-                  d="M20.77 12c0-.359-.194-.594-.582-1.066C18.768 9.21 15.636 6 12 6s-6.768 3.21-8.188 4.934c-.388.472-.582.707-.582 1.066s.194.594.582 1.066C5.232 14.79 8.364 18 12 18s6.768-3.21 8.188-4.934c.388-.472.582-.707.582-1.066M12 15a3 3 0 1 0 0-6a3 3 0 0 0 0 6"
-                  clip-rule="evenodd" />
-              </svg>View Appointment
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-eye w-4 mr-3 text-green-500"></i>View Appointment
             </a>
-            <!-- <a routerLink="/appointment/approvals" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200">
-              <i class="fas fa-check-circle w-4 mr-3 text-orange-500"></i>Approvals
-            </a> -->
           </div>
         </div>
 
-        <!-- Visitor List Dropdown
+        <!-- Visitor List Dropdown -->
         <div class="relative group whitespace-nowrap text-sm navbar-hover-blue" routerLinkActive="navbar-active-blue"
           (mouseenter)="mouseEnter('visitor-list')" (mouseleave)="mouseLeave()">
           <button (click)="toggleDropdown('visitor-list')"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 w-full text-left card-hover">
-            <svg class="w-[30px] h-[30px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[30px] h-[30px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
               <defs>
                 <linearGradient id="visitor-list-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -199,50 +153,40 @@
             <span class="navbar-font">Visitor List</span>
           </button>
           <div *ngIf="openDropdown === 'visitor-list'"
-            class="absolute z-20 mt-2 w-64 glass-effect rounded-xl shadow-xl py-2 fade-in">
+            class="absolute z-20 mt-2 w-64 glass-effect rounded-xl shadow-xl py-2">
             <a routerLink="/visitor-list/checked-in"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                class="w-6 h-6 mr-3 inline align-middle">
-                <path fill="currentColor"
-                  d="M16 19H8c-1.654 0-3-1.346-3-3V8c0-1.654 1.346-3 3-3h5a1 1 0 1 1 0 2H8c-.552 0-1 .449-1 1v8c0 .551.448 1 1 1h8c.552 0 1-.449 1-1v-3a1 1 0 1 1 2 0v3c0 1.654-1.346 3-3 3m-2.834-4.167c-.35 0-.689-.139-.941-.391l-2.668-2.667a1.334 1.334 0 0 1 1.887-1.885l1.416 1.417l3.475-5.455a1.334 1.334 0 1 1 2.332 1.294l-4.334 7a1.33 1.33 0 0 1-.98.673z" />
-              </svg>Checked In Visitors
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-sign-in-alt w-4 mr-3 text-green-500"></i>Checked In Visitors
             </a>
             <a routerLink="/visitor-list/checked-out"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048" class="w-4 h-4 mr-3 inline align-middle">
-                <path fill="#000"
-                  d="M939 171q129 0 249 33t224 95t190 146t147 190t94 225t34 249q0 129-33 249t-95 224t-146 191t-190 147t-225 94t-249 34t-250-33t-224-95t-190-147t-147-190t-94-224t-34-250q0-129 33-249t95-224t147-190t190-147t224-94t250-34m0 1740q111 0 213-28t192-81t162-126t125-162t81-191t29-214q0-110-28-212t-81-192t-126-162t-163-126t-191-81t-213-29q-111 0-213 28t-192 81t-162 126t-125 162t-81 191t-29 214q0 111 28 213t81 192t125 162t163 126t191 80t214 29m256-1058h170v683H683v-171h391L537 828l121-120l537 537z" />
-              </svg>Checked Out Visitors
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-sign-out-alt w-4 mr-3 text-red-500"></i>Checked Out Visitors
             </a>
             <a routerLink="/visitor-list/details"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <i class="fas fa-info-circle w-4 mr-3 text-blue-500"></i>Visitors
-              Detail
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-info-circle w-4 mr-3 text-blue-500"></i>Visitors Detail
             </a>
             <a routerLink="/visitor-list/history"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <i class="fas fa-history w-4 mr-3 text-purple-500"></i>Visitor
-              History
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-history w-4 mr-3 text-purple-500"></i>Visitor History
             </a>
             <a routerLink="/visitor-list/ids"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
               <i class="fas fa-id-card w-4 mr-3 text-indigo-500"></i>Visitor IDs
             </a>
             <a routerLink="/visitor-list/items-carried"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <i class="fas fa-briefcase w-4 mr-3 text-orange-500"></i>Items
-              Carried
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-briefcase w-4 mr-3 text-orange-500"></i>Items Carried
             </a>
           </div>
-        </div> -->
+        </div>
 
         <!-- Status Dropdown -->
         <div class="relative group navbar-hover-blue" routerLinkActive="navbar-active-blue"
           (mouseenter)="mouseEnter('status')" (mouseleave)="mouseLeave()">
           <button (click)="toggleDropdown('status')"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 w-full text-left card-hover">
-            <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12">
               <defs>
                 <linearGradient id="status-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -255,16 +199,14 @@
             </svg>
             <span class="navbar-font">Status</span>
           </button>
-          <div *ngIf="openDropdown === 'status'"
-            class="absolute z-20 mt-2 w-72 glass-effect rounded-xl shadow-xl py-2 fade-in">
+          <div *ngIf="openDropdown === 'status'" class="absolute z-20 mt-2 w-72 glass-effect rounded-xl shadow-xl py-2">
             <a routerLink="/status/visitor-appointment"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
               <i class="fas fa-calendar-check w-4 mr-3 text-blue-500"></i>Visitor Appointment Status
             </a>
             <a routerLink="/status/on-gate"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <i class="fas fa-door-open w-4 mr-3 text-green-500"></i>On Gate
-              Status
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-door-open w-4 mr-3 text-green-500"></i>On Gate Status
             </a>
           </div>
         </div>
@@ -274,7 +216,7 @@
           (mouseenter)="mouseEnter('blacklist')" (mouseleave)="mouseLeave()">
           <button (click)="toggleDropdown('blacklist')"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 w-full text-left card-hover">
-            <svg class="w-[30px] h-[30px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[30px] h-[30px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 32 32">
               <defs>
                 <linearGradient id="blacklist-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -288,15 +230,14 @@
             <span class="navbar-font">Blacklist</span>
           </button>
           <div *ngIf="openDropdown === 'blacklist'"
-            class="absolute z-20 mt-2 w-64 glass-effect rounded-xl shadow-xl py-2 fade-in">
-            <a routerLink="/blacklist/add" class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <i class="fas fa-user-times w-4 mr-3 text-red-500"></i>Blacklist
-              Visitor
+            class="absolute z-20 mt-2 w-64 glass-effect rounded-xl shadow-xl py-2">
+            <a routerLink="/blacklist/add"
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-user-times w-4 mr-3 text-red-500"></i>Blacklist Visitor
             </a>
             <a routerLink="/blacklist/view"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <i class="fas fa-list-alt w-4 mr-3 text-red-500"></i>View
-              Blacklist
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-list-alt w-4 mr-3 text-red-500"></i>View Blacklist
             </a>
           </div>
         </div>
@@ -306,7 +247,7 @@
           (mouseenter)="mouseEnter('admin')" (mouseleave)="mouseLeave()">
           <button (click)="toggleDropdown('admin')"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 w-full text-left card-hover">
-            <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20">
               <defs>
                 <linearGradient id="admin-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -320,45 +261,42 @@
             <span class="navbar-font">Admin</span>
           </button>
           <div *ngIf="openDropdown === 'admin'"
-            class="absolute z-20 right-0 mt-2 w-72 glass-effect rounded-xl shadow-xl py-2 fade-in">
+            class="absolute z-20 right-0 mt-2 w-72 glass-effect rounded-xl shadow-xl py-2">
             <a routerLink="/admin/add-user"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
               <i class="fas fa-user-plus w-4 mr-3 text-blue-500"></i>Add User
             </a>
             <a routerLink="/admin/edit-user"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
               <i class="fas fa-user-edit w-4 mr-3 text-green-500"></i>Edit User
             </a>
             <a routerLink="/admin/change-password"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
               <i class="fas fa-key w-4 mr-3 text-orange-500"></i>Change Password
             </a>
             <a routerLink="/admin/add-role"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
               <i class="fas fa-user-tag w-4 mr-3 text-purple-500"></i>Add Role
             </a>
             <a routerLink="/admin/edit-role"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
               <i class="fas fa-edit w-4 mr-3 text-indigo-500"></i>Edit Role
             </a>
             <a routerLink="/admin/unit-wise-details"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <i class="fas fa-building w-4 mr-3 text-blue-500"></i>Unit Wise
-              Admin Details
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-building w-4 mr-3 text-blue-500"></i>Unit Wise Admin Details
             </a>
             <a routerLink="/admin/add-employee"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <i class="fas fa-user-tie w-4 mr-3 text-green-500"></i>Add
-              Employee
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-user-tie w-4 mr-3 text-green-500"></i>Add Employee
             </a>
             <a routerLink="/admin/appointment-approval"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
               <i class="fas fa-check-double w-4 mr-3 text-orange-500"></i>Appointment Status Approval
             </a>
             <a routerLink="/admin/department-master"
-              class="block px-4 py-3 text-sm text-gray-700 transition-colors duration-200">
-              <i class="fas fa-sitemap w-4 mr-3 text-purple-500"></i>Department
-              Master
+              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <i class="fas fa-sitemap w-4 mr-3 text-purple-500"></i>Department Master
             </a>
           </div>
         </div>
@@ -367,7 +305,7 @@
         <div class="flex items-center gap-x-[22px]">
           <a routerLink="/green-channel" routerLinkActive="navbar-active-blue"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 card-hover navbar-hover-blue text-xs flex-nowrap whitespace-nowrap">
-            <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <defs>
                 <linearGradient id="green-channel-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -382,7 +320,7 @@
           </a>
           <a routerLink="/check-out" routerLinkActive="navbar-active-blue"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 card-hover navbar-hover-blue text-xs flex-nowrap whitespace-nowrap">
-            <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <defs>
                 <linearGradient id="checkout-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -399,7 +337,7 @@
         <!-- Logout Icon -->
         <button (click)="logout()"
           class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 card-hover navbar-hover-blue">
-          <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+          <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <defs>
               <linearGradient id="logout-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -421,7 +359,7 @@
       <!-- Mobile Dashboard -->
       <a routerLink="/dashboard" (click)="closeMobileMenu()"
         class="block flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-700 transition-all duration-300 navbar-hover-blue">
-        <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+        <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
           xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <defs>
             <linearGradient id="dashboard-gradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -441,7 +379,7 @@
         <button (click)="toggleDropdown('visitor-registration-mobile')"
           class="w-full flex items-center justify-between space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-700 transition-all duration-300 navbar-hover-blue">
           <div class="flex items-center space-x-3">
-            <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
               <defs>
                 <linearGradient id="visitor-registration-gradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -464,32 +402,18 @@
             </svg>
             <span>Visitor Registration</span>
           </div>
-          <i class="fas fa-chevron-down text-xs transition-transform duration-200" [ngClass]="{
+          <i class="fas fa-chevron-down text-xs transition-transform" [ngClass]="{
               'rotate-180': openDropdown === 'visitor-registration-mobile',
             }"></i>
         </button>
-        <div *ngIf="openDropdown === 'visitor-registration-mobile'" class="pl-10 pt-2 pb-2 space-y-3 fade-in">
+        <div *ngIf="openDropdown === 'visitor-registration-mobile'" class="pl-10 pt-2 pb-2 space-y-3">
           <a routerLink="/visitor-registration/register" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3.6 h-3.6 mr-3 inline align-middle">
-              <path fill="#000"
-                d="m362.7 19.3l-48.4 48.4l130 130l48.4-48.4c25-25 25-65.5 0-90.5l-39.4-39.5c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2c-2.5 8.5-.2 17.6 6 23.8s15.3 8.5 23.7 6.1L151 475.7c14.1-4.2 27-11.8 37.4-22.2l233.3-233.2z" />
-            </svg>Registration
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-edit w-4 mr-3 text-blue-500"></i>Registration
           </a>
-          <!-- <a routerLink="/visitor-registration/gate-pass" (click)="closeMobileMenu()" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200">
-            <i class="fas fa-ticket-alt w-4 mr-3 text-green-500"></i>Gate Pass (No Appointment)
-          </a> -->
           <a routerLink="/visitor-registration/backside" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
-              class="inline align-middle w-4 h-4 mr-3">
-              <g fill="none" fill-rule="evenodd">
-                <path
-                  d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
-                <path fill="#000"
-                  d="M2.614 5.426A1.5 1.5 0 0 1 4 4.5h10a7.5 7.5 0 1 1 0 15H5a1.5 1.5 0 0 1 0-3h9a4.5 4.5 0 1 0 0-9H7.621l.94.94a1.5 1.5 0 0 1-2.122 2.12l-3.5-3.5a1.5 1.5 0 0 1-.325-1.634" />
-              </g>
-            </svg>Backside
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-undo w-4 mr-3 text-green-500"></i>Backside
           </a>
         </div>
       </div>
@@ -499,7 +423,7 @@
         <button (click)="toggleDropdown('appointment-mobile')"
           class="w-full flex items-center justify-between space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-700 transition-all duration-300 navbar-hover-blue">
           <div class="flex items-center space-x-3">
-            <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <defs>
                 <linearGradient id="appointment-gradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -512,29 +436,18 @@
             </svg>
             <span>Appointment</span>
           </div>
-          <i class="fas fa-chevron-down text-xs transition-transform duration-200"
+          <i class="fas fa-chevron-down text-xs transition-transform"
             [ngClass]="{ 'rotate-180': openDropdown === 'appointment-mobile' }"></i>
         </button>
-        <div *ngIf="openDropdown === 'appointment-mobile'" class="pl-10 pt-2 pb-2 space-y-3 fade-in">
+        <div *ngIf="openDropdown === 'appointment-mobile'" class="pl-10 pt-2 pb-2 space-y-3">
           <a routerLink="/appointment/schedule" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 mr-3 inline align-middle">
-              <path fill="#000"
-                d="M13 11.6V8q0-.425-.288-.712T12 7t-.712.288T11 8v3.975q0 .2.075.388t.225.337l3.3 3.3q.275.275.7.275T16 16t.275-.7t-.275-.7zM12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
-            </svg>Schedule
-            Appointment
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-clock w-4 mr-3 text-blue-500"></i>Schedule Appointment
           </a>
           <a routerLink="/appointment/view" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="2 6 20 12" class="w-4 h-4 mr-3 inline align-middle">
-              <path fill="#000" fill-rule="evenodd"
-                d="M20.77 12c0-.359-.194-.594-.582-1.066C18.768 9.21 15.636 6 12 6s-6.768 3.21-8.188 4.934c-.388.472-.582.707-.582 1.066s.194.594.582 1.066C5.232 14.79 8.364 18 12 18s6.768-3.21 8.188-4.934c.388-.472.582-.707.582-1.066M12 15a3 3 0 1 0 0-6a3 3 0 0 0 0 6"
-                clip-rule="evenodd" />
-            </svg>View Appointment
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-eye w-4 mr-3 text-green-500"></i>View Appointment
           </a>
-          <!-- <a routerLink="/appointment/approvals" (click)="closeMobileMenu()" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200">
-            <i class="fas fa-check-circle w-4 mr-3 text-orange-500"></i>Approvals
-          </a> -->
         </div>
       </div>
 
@@ -543,7 +456,7 @@
         <button (click)="toggleDropdown('visitor-list-mobile')"
           class="w-full flex items-center justify-between space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-700 transition-all duration-300 navbar-hover-blue">
           <div class="flex items-center space-x-3">
-            <svg class="w-[30px] h-[30px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[30px] h-[30px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
               <defs>
                 <linearGradient id="visitor-list-gradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -556,43 +469,33 @@
             </svg>
             <span>Visitor List</span>
           </div>
-          <i class="fas fa-chevron-down text-xs transition-transform duration-200"
+          <i class="fas fa-chevron-down text-xs transition-transform"
             [ngClass]="{ 'rotate-180': openDropdown === 'visitor-list-mobile' }"></i>
         </button>
-        <div *ngIf="openDropdown === 'visitor-list-mobile'" class="pl-10 pt-2 pb-2 space-y-3 fade-in">
+        <div *ngIf="openDropdown === 'visitor-list-mobile'" class="pl-10 pt-2 pb-2 space-y-3">
           <a routerLink="/visitor-list/checked-in" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-              class="w-6 h-6 mr-3 inline align-middle">
-              <path fill="currentColor"
-                d="M16 19H8c-1.654 0-3-1.346-3-3V8c0-1.654 1.346-3 3-3h5a1 1 0 1 1 0 2H8c-.552 0-1 .449-1 1v8c0 .551.448 1 1 1h8c.552 0 1-.449 1-1v-3a1 1 0 1 1 2 0v3c0 1.654-1.346 3-3 3m-2.834-4.167c-.35 0-.689-.139-.941-.391l-2.668-2.667a1.334 1.334 0 0 1 1.887-1.885l1.416 1.417l3.475-5.455a1.334 1.334 0 1 1 2.332 1.294l-4.334 7a1.33 1.33 0 0 1-.98.673z" />
-            </svg>Checked In Visitors
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-sign-in-alt w-4 mr-3 text-green-500"></i>Checked In Visitors
           </a>
           <a routerLink="/visitor-list/checked-out" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048" class="w-4 h-4 mr-3 inline align-middle">
-              <path fill="#000"
-                d="M939 171q129 0 249 33t224 95t190 146t147 190t94 225t34 249q0 129-33 249t-95 224t-146 191t-190 147t-225 94t-249 34t-250-33t-224-95t-190-147t-147-190t-94-224t-34-250q0-129 33-249t95-224t147-190t190-147t224-94t250-34m0 1740q111 0 213-28t192-81t162-126t125-162t81-191t29-214q0-110-28-212t-81-192t-126-162t-163-126t-191-81t-213-29q-111 0-213 28t-192 81t-162 126t-125 162t-81 191t-29 214q0 111 28 213t81 192t125 162t163 126t191 80t214 29m256-1058h170v683H683v-171h391L537 828l121-120l537 537z" />
-            </svg>Checked Out Visitors
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-sign-out-alt w-4 mr-3 text-red-500"></i>Checked Out Visitors
           </a>
           <a routerLink="/visitor-list/details" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <i class="fas fa-info-circle w-4 mr-3 text-blue-500"></i>Visitors
-            Detail
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-info-circle w-4 mr-3 text-blue-500"></i>Visitors Detail
           </a>
           <a routerLink="/visitor-list/history" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <i class="fas fa-history w-4 mr-3 text-purple-500"></i>Visitor
-            History
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-history w-4 mr-3 text-purple-500"></i>Visitor History
           </a>
           <a routerLink="/visitor-list/ids" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-id-card w-4 mr-3 text-indigo-500"></i>Visitor IDs
           </a>
           <a routerLink="/visitor-list/items-carried" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <i class="fas fa-briefcase w-4 mr-3 text-orange-500"></i>Items
-            Carried
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-briefcase w-4 mr-3 text-orange-500"></i>Items Carried
           </a>
         </div>
       </div>
@@ -602,7 +505,7 @@
         <button (click)="toggleDropdown('status-mobile')"
           class="w-full flex items-center justify-between space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-700 transition-all duration-300 navbar-hover-blue">
           <div class="flex items-center space-x-3">
-            <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12">
               <defs>
                 <linearGradient id="status-gradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -615,19 +518,17 @@
             </svg>
             <span>Status</span>
           </div>
-          <i class="fas fa-chevron-down text-xs transition-transform duration-200"
+          <i class="fas fa-chevron-down text-xs transition-transform"
             [ngClass]="{ 'rotate-180': openDropdown === 'status-mobile' }"></i>
         </button>
-        <div *ngIf="openDropdown === 'status-mobile'" class="pl-10 pt-2 pb-2 space-y-3 fade-in">
+        <div *ngIf="openDropdown === 'status-mobile'" class="pl-10 pt-2 pb-2 space-y-3">
           <a routerLink="/status/visitor-appointment" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <i class="fas fa-calendar-check w-4 mr-3 text-blue-500"></i>Visitor
-            Appointment Status
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-calendar-check w-4 mr-3 text-blue-500"></i>Visitor Appointment Status
           </a>
           <a routerLink="/status/on-gate" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <i class="fas fa-door-open w-4 mr-3 text-green-500"></i>On Gate
-            Status
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-door-open w-4 mr-3 text-green-500"></i>On Gate Status
           </a>
         </div>
       </div>
@@ -637,7 +538,7 @@
         <button (click)="toggleDropdown('blacklist-mobile')"
           class="w-full flex items-center justify-between space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-700 transition-all duration-300 navbar-hover-blue">
           <div class="flex items-center space-x-3">
-            <svg class="w-[30px] h-[30px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[30px] h-[30px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 32 32">
               <defs>
                 <linearGradient id="blacklist-gradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -650,17 +551,16 @@
             </svg>
             <span>Blacklist</span>
           </div>
-          <i class="fas fa-chevron-down text-xs transition-transform duration-200"
+          <i class="fas fa-chevron-down text-xs transition-transform"
             [ngClass]="{ 'rotate-180': openDropdown === 'blacklist-mobile' }"></i>
         </button>
-        <div *ngIf="openDropdown === 'blacklist-mobile'" class="pl-10 pt-2 pb-2 space-y-3 fade-in">
+        <div *ngIf="openDropdown === 'blacklist-mobile'" class="pl-10 pt-2 pb-2 space-y-3">
           <a routerLink="/blacklist/add" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <i class="fas fa-user-times w-4 mr-3 text-red-500"></i>Blacklist
-            Visitor
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-user-times w-4 mr-3 text-red-500"></i>Blacklist Visitor
           </a>
           <a routerLink="/blacklist/view" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-list-alt w-4 mr-3 text-red-500"></i>View Blacklist
           </a>
         </div>
@@ -671,7 +571,7 @@
         <button (click)="toggleDropdown('admin-mobile')"
           class="w-full flex items-center justify-between space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-700 transition-all duration-300 navbar-hover-blue">
           <div class="flex items-center space-x-3">
-            <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+            <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
               xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20">
               <defs>
                 <linearGradient id="admin-gradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -684,47 +584,45 @@
             </svg>
             <span>Admin</span>
           </div>
-          <i class="fas fa-chevron-down text-xs transition-transform duration-200"
+          <i class="fas fa-chevron-down text-xs transition-transform"
             [ngClass]="{ 'rotate-180': openDropdown === 'admin-mobile' }"></i>
         </button>
-        <div *ngIf="openDropdown === 'admin-mobile'" class="pl-10 pt-2 pb-2 space-y-3 fade-in">
+        <div *ngIf="openDropdown === 'admin-mobile'" class="pl-10 pt-2 pb-2 space-y-3">
           <a routerLink="/admin/add-user" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-user-plus w-4 mr-3 text-blue-500"></i>Add User
           </a>
           <a routerLink="/admin/edit-user" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-user-edit w-4 mr-3 text-green-500"></i>Edit User
           </a>
           <a routerLink="/admin/change-password" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-key w-4 mr-3 text-orange-500"></i>Change Password
           </a>
           <a routerLink="/admin/add-role" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-user-tag w-4 mr-3 text-purple-500"></i>Add Role
           </a>
           <a routerLink="/admin/edit-role" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-edit w-4 mr-3 text-indigo-500"></i>Edit Role
           </a>
           <a routerLink="/admin/unit-wise-details" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <i class="fas fa-building w-4 mr-3 text-blue-500"></i>Unit Wise
-            Admin Details
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-building w-4 mr-3 text-blue-500"></i>Unit Wise Admin Details
           </a>
           <a routerLink="/admin/add-employee" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-user-tie w-4 mr-3 text-green-500"></i>Add Employee
           </a>
           <a routerLink="/admin/appointment-approval" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-check-double w-4 mr-3 text-orange-500"></i>Appointment Status Approval
           </a>
           <a routerLink="/admin/department-master" (click)="closeMobileMenu()"
-            class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 transition-colors duration-200">
-            <i class="fas fa-sitemap w-4 mr-3 text-purple-500"></i>Department
-            Master
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-sitemap w-4 mr-3 text-purple-500"></i>Department Master
           </a>
         </div>
       </div>
@@ -732,7 +630,7 @@
       <!-- Other non-dropdown mobile items -->
       <a routerLink="/green-channel" (click)="closeMobileMenu()"
         class="block flex items-center space-x-7 px-4 py-3 rounded-xl text-base font-medium text-gray-700 transition-all duration-300 navbar-hover-blue">
-        <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+        <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
           xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <defs>
             <linearGradient id="green-channel-gradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -747,7 +645,7 @@
       </a>
       <a routerLink="/check-out" (click)="closeMobileMenu()"
         class="block flex items-center space-x-7 px-4 py-3 rounded-xl text-base font-medium text-gray-700 transition-all duration-300 navbar-hover-blue">
-        <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+        <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
           xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <defs>
             <linearGradient id="checkout-gradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -764,7 +662,7 @@
       <!-- Logout Button -->
       <button (click)="logout(); closeMobileMenu()"
         class="w-full flex items-center space-x-7 px-4 py-3 rounded-xl text-base font-medium text-gray-700 transition-all duration-300 navbar-hover-blue">
-        <svg class="w-[26px] h-[26px] text-center" style="display:inline-block;vertical-align:middle;"
+        <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
           xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <defs>
             <linearGradient id="logout-gradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
