@@ -1,0 +1,31 @@
+<header
+  class="border-b border-white/20 z-50"
+>
+  <div class="w-full mx-auto" style="padding-left: 32px; padding-right: 32px;">
+    <div class="flex items-center justify-between h-20 lg:h-28">
+      <h1 class="font-bold text-left leading-relaxed"
+          style="
+            font-family: 'Lexend', sans-serif;
+            font-size: 32px;
+            background: linear-gradient(180deg, #A053FF 0%, #010FD2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+          ">
+        Visitor Management System
+      </h1>
+      <div class="flex items-center space-x-8">
+        <div class="hidden md:flex items-center space-x-2 text-sm text-gray-600">
+          <i class="fas fa-clock text-blue-500"></i>
+          <span id="current-time">{{ currentTime | date: "medium" }}</span>
+        </div>
+        <img
+          src="tata.png"
+          alt="TATA Logo"
+          class="h-10 lg:h-12 opacity-90 hover:opacity-100 transition-opacity self-center"
+        />
+      </div>
+    </div>
+  </div>
+</header>

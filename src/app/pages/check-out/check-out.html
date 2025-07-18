@@ -1,0 +1,281 @@
+<div class="space-y-6 animate-fade-in">
+  <!-- Page Header -->
+  <div class="text-center">
+    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">
+      Visitor Check-Out
+    </h1>
+    <p class="text-gray-600 mt-1">
+      Scan visitor ID card or search by name to check out
+    </p>
+  </div>
+
+  <!-- Current Date Display -->
+  <div class="glass-effect rounded-xl p-6 text-center">
+    <div class="flex items-center justify-center space-x-3">
+      <i class="fas fa-calendar-alt text-blue-500 text-xl"></i>
+      <div>
+        <span class="text-sm font-medium text-gray-600">Current Date:</span>
+        <span class="ml-2 text-lg font-bold text-blue-600">{{
+          currentDate
+        }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Check-Out Form -->
+  <div class="glass-effect rounded-xl p-6 lg:p-8">
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <!-- Search Type Selection -->
+      <div class="space-y-4">
+        <h3
+          class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+        >
+          <i class="fas fa-search text-blue-500"></i>
+          <span>Search Method</span>
+        </h3>
+
+        <div
+          class="flex flex-col sm:flex-row items-center justify-center gap-6"
+        >
+          <label
+            class="flex items-center space-x-3 cursor-pointer p-4 rounded-xl border-2 border-gray-200 hover:border-blue-300 transition-colors"
+          >
+            <input
+              type="radio"
+              formControlName="searchType"
+              value="barcode"
+              class="w-5 h-5 text-blue-600 focus:ring-blue-500"
+            />
+            <div class="flex items-center space-x-2">
+              <i class="fas fa-barcode text-blue-500"></i>
+              <span class="text-gray-700 font-medium">By Barcode</span>
+            </div>
+          </label>
+
+          <label
+            class="flex items-center space-x-3 cursor-pointer p-4 rounded-xl border-2 border-gray-200 hover:border-blue-300 transition-colors"
+          >
+            <input
+              type="radio"
+              formControlName="searchType"
+              value="visitorName"
+              class="w-5 h-5 text-blue-600 focus:ring-blue-500"
+            />
+            <div class="flex items-center space-x-2">
+              <i class="fas fa-user text-green-500"></i>
+              <span class="text-gray-700 font-medium">By Visitor Name</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Search Input -->
+      <div class="space-y-4">
+        <div *ngIf="searchType?.value === 'barcode'" class="space-y-4">
+          <h3
+            class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+          >
+            <i class="fas fa-barcode text-blue-500"></i>
+            <span>Scan Visitor Barcode</span>
+          </h3>
+
+          <div
+            class="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <label for="scan-barcode" class="text-sm font-medium text-gray-700"
+              >Barcode:</label
+            >
+            <div class="relative w-full sm:w-96">
+              <input
+                type="text"
+                id="scan-barcode"
+                formControlName="searchQuery"
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                placeholder="Scan or enter barcode"
+              />
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+                <i class="fas fa-barcode text-gray-400"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="searchType?.value === 'visitorName'" class="space-y-4">
+          <h3
+            class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+          >
+            <i class="fas fa-user text-green-500"></i>
+            <span>Search by Visitor Name</span>
+          </h3>
+
+          <div
+            class="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <label for="scan-name" class="text-sm font-medium text-gray-700"
+              >Visitor Name:</label
+            >
+            <div class="relative w-full sm:w-96">
+              <input
+                type="text"
+                id="scan-name"
+                formControlName="searchQuery"
+                class="w-full px-4 py-3 pr-12 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                placeholder="Enter visitor name"
+              />
+              <button
+                type="button"
+                (click)="searchVisitor()"
+                class="absolute inset-y-0 right-0 flex items-center px-4 text-gray-400 hover:text-gray-600"
+              >
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visitor Details -->
+      <div *ngIf="visitorDetails" class="space-y-4">
+        <h3
+          class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+        >
+          <i class="fas fa-user-circle text-purple-500"></i>
+          <span>Visitor Details</span>
+        </h3>
+
+        <div class="glass-effect rounded-xl p-6 border-l-4 border-green-500">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div class="flex items-center space-x-3">
+                <div
+                  class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center"
+                >
+                  <span class="text-white font-medium">{{
+                    visitorDetails.name?.charAt(0)
+                  }}</span>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-gray-500">
+                    Visitor Name
+                  </div>
+                  <div class="text-lg font-semibold text-gray-900">
+                    {{ visitorDetails.name }}
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="text-sm font-medium text-gray-500">Company</div>
+                <div class="text-lg font-semibold text-gray-900">
+                  {{ visitorDetails.company }}
+                </div>
+              </div>
+
+              <div>
+                <div class="text-sm font-medium text-gray-500">
+                  Phone Number
+                </div>
+                <div class="text-lg font-semibold text-gray-900">
+                  {{ visitorDetails.phone }}
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <div class="text-sm font-medium text-gray-500">
+                  Check-In Time
+                </div>
+                <div class="text-lg font-semibold text-green-600">
+                  {{ visitorDetails.checkInTime }}
+                </div>
+              </div>
+
+              <div>
+                <div class="text-sm font-medium text-gray-500">From</div>
+                <div class="text-lg font-semibold text-gray-900">
+                  {{ visitorDetails.from }}
+                </div>
+              </div>
+
+              <div>
+                <div class="text-sm font-medium text-gray-500">Purpose</div>
+                <div class="text-lg font-semibold text-gray-900">
+                  {{ visitorDetails.purpose }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Status Badge -->
+          <div class="mt-4 flex items-center space-x-2">
+            <span class="status-badge bg-green-100 text-green-800"
+              >Currently Checked In</span
+            >
+            <span class="text-sm text-gray-500">Ready for check-out</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- No Visitor Found -->
+      <div
+        *ngIf="noVisitorFound"
+        class="glass-effect rounded-xl p-6 border-l-4 border-red-500"
+      >
+        <div class="flex items-center space-x-3">
+          <div
+            class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-exclamation-triangle text-red-500 text-xl"></i>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-gray-900">
+              Visitor Not Found
+            </h4>
+            <p class="text-gray-600">
+              No visitor found with the provided information. Please check and
+              try again.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex justify-center pt-6">
+        <button
+          type="submit"
+          [disabled]="checkoutForm.invalid || isSubmitting || !visitorDetails"
+          class="flex items-center justify-center space-x-2 px-8 py-3 rounded-xl bg-gradient-to-r from-red-600 to-pink-600 text-white font-medium hover:from-red-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105"
+        >
+          <i *ngIf="isSubmitting" class="fas fa-spinner fa-spin"></i>
+          <i *ngIf="!isSubmitting" class="fas fa-sign-out-alt"></i>
+          <span>{{
+            isSubmitting ? "Processing..." : "Mark Check-Out Time"
+          }}</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Success Message -->
+  <div
+    *ngIf="checkoutSuccess"
+    class="glass-effect rounded-xl p-6 border-l-4 border-green-500"
+  >
+    <div class="flex items-center space-x-3">
+      <div
+        class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center"
+      >
+        <i class="fas fa-check-circle text-green-500 text-xl"></i>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold text-gray-900">
+          Check-Out Successful
+        </h4>
+        <p class="text-gray-600">
+          Visitor has been successfully checked out at {{ checkoutTime }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

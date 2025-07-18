@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+body,
+html {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background:
+    /* Blob 1: Top right */
+    radial-gradient(
+      ellipse 300px 180px at 85% 8%,
+      #3b95f533 0%,
+      transparent 100%
+    ),
+    /* Blob 2: Bottom left */
+      radial-gradient(
+        ellipse 250px 150px at 12% 88%,
+        #3b95f522 0%,
+        transparent 100%
+      ),
+    /* Blob 3: Top left */
+      radial-gradient(
+        ellipse 200px 120px at 10% 12%,
+        #3b95f522 0%,
+        transparent 100%
+      ),
+    /* Blob 4: Center right */
+      radial-gradient(
+        ellipse 180px 100px at 80% 55%,
+        #3b95f522 0%,
+        transparent 100%
+      ),
+    /* Blob 5: Center left */
+      radial-gradient(
+        ellipse 120px 80px at 25% 60%,
+        #3b95f522 0%,
+        transparent 100%
+      ),
+    /* Main soft white/blue base */
+      linear-gradient(120deg, #fafdff 0%, #eaf6ff 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+}
+
+.navbar-font {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0 !important;
+}
+
+.glass-effect {
+  border: 1px solid #e5e7eb !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}

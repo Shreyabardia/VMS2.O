@@ -1,0 +1,461 @@
+<div class="space-y-6 animate-fade-in">
+  <!-- Page Header -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">
+        Visitor Registration
+      </h1>
+      <p class="text-gray-600 mt-1">Register a new visitor to the facility</p>
+    </div>
+    <div class="mt-4 sm:mt-0">
+      <button
+        routerLink="/status/on-gate"
+        class="flex items-center space-x-2 px-4 py-2 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105"
+      >
+        <i class="fas fa-ticket-alt"></i>
+        <span>Gate Pass</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Registration Form -->
+  <div class="glass-effect rounded-xl p-6 lg:p-8">
+    <form
+      [formGroup]="registrationForm"
+      (ngSubmit)="onSubmit()"
+      class="space-y-6"
+    >
+      <!-- Top Section: Add Visitor, Visitor & Appointment Type, Visitor Photo -->
+      <div class="flex flex-col md:flex-row md:items-start md:space-x-8 space-y-6 md:space-y-0">
+        <div class="flex-1">
+          <!-- Add Visitor Heading -->
+          <h2 class="text-lg font-semibold text-gray-900 flex items-center space-x-2 mb-2">
+            <i class="fas fa-user-plus text-blue-500"></i>
+            <span>Add Visitor</span>
+          </h2>
+          <!-- Visitor & Appointment Type -->
+          <div class="space-y-6">
+            <!-- Visitor Type -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Visitor Type</label>
+              <div class="flex items-center space-x-6">
+                <label class="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="visitorType"
+                    formControlName="visitorType"
+                    value="new"
+                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                  />
+                  <span class="ml-2 text-gray-700">New Visitor</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="visitorType"
+                    formControlName="visitorType"
+                    value="existing"
+                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                  />
+                  <span class="ml-2 text-gray-700">Existing Visitor</span>
+                </label>
+              </div>
+            </div>
+            <!-- Appointment Type -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Appointment Type</label>
+              <div class="flex items-center space-x-6">
+                <label class="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="appointmentType"
+                    formControlName="appointmentType"
+                    value="prior"
+                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                  />
+                  <span class="ml-2 text-gray-700">Prior Appointment</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="appointmentType"
+                    formControlName="appointmentType"
+                    value="none"
+                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                  />
+                  <span class="ml-2 text-gray-700">No Appointment</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Visitor Photo Upload Section -->
+        <div class="w-full md:w-44 flex-shrink-0">
+          <div class="bg-white rounded-xl shadow p-3 border border-gray-200 flex flex-col items-center">
+            <div class="font-semibold text-gray-800 mb-2 flex items-center space-x-2">
+              <i class="fas fa-camera text-purple-500"></i>
+              <span>Visitor Photo</span>
+            </div>
+            <div class="w-28 h-28 bg-gray-50 border border-dashed border-gray-300 rounded flex items-center justify-center mb-2 overflow-hidden">
+              <img *ngIf="photoPreview" [src]="photoPreview" alt="Visitor Photo Preview" class="object-cover w-full h-full" />
+              <span *ngIf="!photoPreview" class="flex items-center justify-center w-full h-full text-gray-400 text-xs text-center">No photo selected</span>
+            </div>
+            <input type="file" accept="image/*" (change)="onPhotoSelected($event)" class="hidden" #photoInput />
+            <button type="button" (click)="photoInput.click()" class="px-3 py-1.5 rounded bg-blue-600 text-white hover:bg-blue-700 transition text-sm">Upload Photo</button>
+          </div>
+        </div>
+      </div>
+      <!-- End Top Section -->
+
+      <!-- Personal Information -->
+      <div class="space-y-4">
+        <h3
+          class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+        >
+          <i class="fas fa-user text-blue-500"></i>
+          <span>Personal Information</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label
+              for="firstName"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >First Name *</label
+            >
+            <input
+              type="text"
+              id="firstName"
+              formControlName="firstName"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter first name"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('firstName')?.invalid &&
+                registrationForm.get('firstName')?.touched
+              "
+              class="text-red-500 text-sm mt-1"
+            >
+              First name is required
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="lastName"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Last Name *</label
+            >
+            <input
+              type="text"
+              id="lastName"
+              formControlName="lastName"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter last name"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('lastName')?.invalid &&
+                registrationForm.get('lastName')?.touched
+              "
+              class="text-red-500 text-sm mt-1"
+            >
+              Last name is required
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Email Address</label
+            >
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter email address"
+            />
+          </div>
+
+          <div>
+            <label
+              for="phone"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Phone Number *</label
+            >
+            <input
+              type="tel"
+              id="phone"
+              formControlName="phone"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter phone number"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('phone')?.invalid &&
+                registrationForm.get('phone')?.touched
+              "
+              class="text-red-500 text-sm mt-1"
+            >
+              Valid phone number is required
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label
+            for="idNumber"
+            class="block text-sm font-medium text-gray-700 mb-2"
+            >ID Number *</label
+          >
+          <input
+            type="text"
+            id="idNumber"
+            formControlName="idNumber"
+            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+            placeholder="Enter ID number (Aadhar/PAN/Passport)"
+          />
+          <div
+            *ngIf="
+              registrationForm.get('idNumber')?.invalid &&
+              registrationForm.get('idNumber')?.touched
+            "
+            class="text-red-500 text-sm mt-1"
+          >
+            ID number is required
+          </div>
+        </div>
+      </div>
+
+      <!-- Company Information -->
+      <div class="space-y-4">
+        <h3
+          class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+        >
+          <i class="fas fa-building text-green-500"></i>
+          <span>Company Information</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label
+              for="company"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Company Name *</label
+            >
+            <input
+              type="text"
+              id="company"
+              formControlName="company"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter company name"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('company')?.invalid &&
+                registrationForm.get('company')?.touched
+              "
+              class="text-red-500 text-sm mt-1"
+            >
+              Company name is required
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="designation"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Designation</label
+            >
+            <input
+              type="text"
+              id="designation"
+              formControlName="designation"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter designation"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label
+            for="purpose"
+            class="block text-sm font-medium text-gray-700 mb-2"
+            >Purpose of Visit *</label
+          >
+          <textarea
+            id="purpose"
+            formControlName="purpose"
+            rows="3"
+            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+            placeholder="Describe the purpose of your visit"
+          ></textarea>
+          <div
+            *ngIf="
+              registrationForm.get('purpose')?.invalid &&
+              registrationForm.get('purpose')?.touched
+            "
+            class="text-red-500 text-sm mt-1"
+          >
+            Purpose of visit is required
+          </div>
+        </div>
+      </div>
+
+      <!-- Visit Details -->
+      <div class="space-y-4">
+        <h3
+          class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+        >
+          <i class="fas fa-calendar-alt text-purple-500"></i>
+          <span>Visit Details</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label
+              for="visitDate"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Visit Date *</label
+            >
+            <input
+              type="date"
+              id="visitDate"
+              formControlName="visitDate"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('visitDate')?.invalid &&
+                registrationForm.get('visitDate')?.touched
+              "
+              class="text-red-500 text-sm mt-1"
+            >
+              Visit date is required
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="expectedDuration"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Expected Duration</label
+            >
+            <select
+              id="expectedDuration"
+              formControlName="expectedDuration"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+            >
+              <option value="">Select duration</option>
+              <option value="1-2 hours">1-2 hours</option>
+              <option value="2-4 hours">2-4 hours</option>
+              <option value="4-8 hours">4-8 hours</option>
+              <option value="Full day">Full day</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label
+            for="meetingPerson"
+            class="block text-sm font-medium text-gray-700 mb-2"
+            >Person to Meet</label
+          >
+          <input
+            type="text"
+            id="meetingPerson"
+            formControlName="meetingPerson"
+            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+            placeholder="Enter the name of person to meet"
+          />
+        </div>
+      </div>
+
+      <!-- Items Carried -->
+      <div class="space-y-4">
+        <h3
+          class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+        >
+          <i class="fas fa-briefcase text-orange-500"></i>
+          <span>Items Carried</span>
+        </h3>
+
+        <div>
+          <label
+            for="itemsCarried"
+            class="block text-sm font-medium text-gray-700 mb-2"
+            >Items Being Carried</label
+          >
+          <textarea
+            id="itemsCarried"
+            formControlName="itemsCarried"
+            rows="2"
+            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+            placeholder="List any items you are carrying (laptop, documents, etc.)"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Terms and Conditions -->
+      <div class="space-y-4">
+        <div class="flex items-start space-x-3">
+          <input
+            type="checkbox"
+            id="termsAccepted"
+            formControlName="termsAccepted"
+            class="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+          />
+          <label for="termsAccepted" class="text-sm text-gray-700">
+            I agree to the
+            <a href="#" class="text-blue-600 hover:text-blue-700 underline"
+              >Terms and Conditions</a
+            >
+            and
+            <a href="#" class="text-blue-600 hover:text-blue-700 underline"
+              >Privacy Policy</a
+            >
+            *
+          </label>
+        </div>
+        <div
+          *ngIf="
+            registrationForm.get('termsAccepted')?.invalid &&
+            registrationForm.get('termsAccepted')?.touched
+          "
+          class="text-red-500 text-sm"
+        >
+          You must accept the terms and conditions
+        </div>
+      </div>
+
+      <!-- Submit Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 pt-6">
+        <button
+          type="submit"
+          [disabled]="registrationForm.invalid || isSubmitting"
+          class="flex-1 flex items-center justify-center space-x-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105"
+        >
+          <i *ngIf="isSubmitting" class="fas fa-spinner fa-spin"></i>
+          <i *ngIf="!isSubmitting" class="fas fa-user-plus"></i>
+          <span>{{
+            isSubmitting ? "Registering..." : "Register Visitor"
+          }}</span>
+        </button>
+
+        <button
+          type="button"
+          (click)="resetForm()"
+          class="flex-1 flex items-center justify-center space-x-2 px-6 py-3 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-all duration-300"
+        >
+          <i class="fas fa-undo"></i>
+          <span>Reset Form</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,559 @@
+<div class="space-y-6 animate-fade-in">
+  <!-- Page Header -->
+  <div class="text-center">
+    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">
+      Foreign National Visitor
+    </h1>
+    <p class="text-gray-600 mt-1">
+      Register foreign national visitors with special requirements
+    </p>
+  </div>
+
+  <!-- Green Channel Form -->
+  <div class="glass-effect rounded-xl p-6 lg:p-8">
+    <form
+      [formGroup]="greenChannelForm"
+      (ngSubmit)="onSubmit()"
+      class="space-y-8"
+    >
+      <!-- Visitor & Appointment Type -->
+      <div class="space-y-6">
+        <h3
+          class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+        >
+          <i class="fas fa-user-tag text-blue-500"></i>
+          <span>Visitor & Appointment Type</span>
+        </h3>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="space-y-4">
+            <label class="block text-sm font-medium text-gray-700"
+              >Visitor Type</label
+            >
+            <div class="flex flex-col sm:flex-row gap-4">
+              <label
+                class="flex items-center space-x-2 cursor-pointer p-3 rounded-lg border border-gray-200 hover:border-blue-300 transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="visitorType"
+                  value="new"
+                  formControlName="visitorType"
+                  class="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                />
+                <span class="text-gray-700 font-medium">New Visitor</span>
+              </label>
+              <label
+                class="flex items-center space-x-2 cursor-pointer p-3 rounded-lg border border-gray-200 hover:border-blue-300 transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="visitorType"
+                  value="existing"
+                  formControlName="visitorType"
+                  class="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                />
+                <span class="text-gray-700 font-medium">Existing Visitor</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <label class="block text-sm font-medium text-gray-700"
+              >Appointment Type</label
+            >
+            <div class="flex flex-col sm:flex-row gap-4">
+              <label
+                class="flex items-center space-x-2 cursor-pointer p-3 rounded-lg border border-gray-200 hover:border-blue-300 transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="appointmentType"
+                  value="prior"
+                  formControlName="appointmentType"
+                  class="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                />
+                <span class="text-gray-700 font-medium">Prior Appointment</span>
+              </label>
+              <label
+                class="flex items-center space-x-2 cursor-pointer p-3 rounded-lg border border-gray-200 hover:border-blue-300 transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="appointmentType"
+                  value="no-appointment"
+                  formControlName="appointmentType"
+                  class="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                />
+                <span class="text-gray-700 font-medium">No Appointment</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Information -->
+      <div class="space-y-6">
+        <h3
+          class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+        >
+          <i class="fas fa-user text-green-500"></i>
+          <span>Visitor Information</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2"
+              >Date & Time *</label
+            >
+            <div
+              class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-blue-50 border border-blue-200"
+            >
+              <i class="fas fa-clock text-blue-500"></i>
+              <span class="text-blue-600 font-medium">{{
+                currentDateTime
+              }}</span>
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="name"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Name *</label
+            >
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter visitor name"
+            />
+          </div>
+
+          <div>
+            <label
+              for="phoneNumber"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Phone Number *</label
+            >
+            <input
+              type="tel"
+              id="phoneNumber"
+              formControlName="phoneNumber"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter phone number"
+            />
+          </div>
+
+          <div>
+            <label
+              for="whomToMeet"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Meeting With *</label
+            >
+            <input
+              type="text"
+              id="whomToMeet"
+              formControlName="whomToMeet"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter contact person"
+            />
+          </div>
+
+          <div>
+            <label
+              for="idType"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >ID Type *</label
+            >
+            <select
+              id="idType"
+              formControlName="idType"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+            >
+              <option value="">Select ID Type</option>
+              <option value="passport">Passport</option>
+              <option value="visa">Visa</option>
+              <option value="driving-license">Driving License</option>
+              <option value="national-id">National ID</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              for="idNumber"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >ID Number *</label
+            >
+            <input
+              type="text"
+              id="idNumber"
+              formControlName="idNumber"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter ID number"
+            />
+          </div>
+
+          <div>
+            <label
+              for="visitorDesignation"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Visitor Designation</label
+            >
+            <select
+              id="visitorDesignation"
+              formControlName="visitorDesignation"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+            >
+              <option value="">Select Designation</option>
+              <option value="manager">Manager</option>
+              <option value="director">Director</option>
+              <option value="engineer">Engineer</option>
+              <option value="consultant">Consultant</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              for="organisation"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Organisation *</label
+            >
+            <input
+              type="text"
+              id="organisation"
+              formControlName="organisation"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter organisation name"
+            />
+          </div>
+
+          <div>
+            <label
+              for="purposeOfVisit"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Purpose of Visit *</label
+            >
+            <select
+              id="purposeOfVisit"
+              formControlName="purposeOfVisit"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+            >
+              <option value="">Select Purpose</option>
+              <option value="business-meeting">Business Meeting</option>
+              <option value="training">Training</option>
+              <option value="consultation">Consultation</option>
+              <option value="inspection">Inspection</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              for="noOfVisitors"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >No of Visitors *</label
+            >
+            <input
+              type="number"
+              id="noOfVisitors"
+              formControlName="noOfVisitors"
+              min="1"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter number of visitors"
+            />
+          </div>
+
+          <div>
+            <label
+              for="visitorPassNo"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Visitor Pass No</label
+            >
+            <input
+              type="text"
+              id="visitorPassNo"
+              formControlName="visitorPassNo"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter pass number"
+            />
+          </div>
+
+          <div>
+            <label
+              for="additionalPersons"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Additional Visitors</label
+            >
+            <input
+              type="text"
+              id="additionalPersons"
+              formControlName="additionalPersons"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter additional visitors"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Address Section -->
+      <div class="space-y-6">
+        <h3
+          class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+        >
+          <i class="fas fa-map-marker-alt text-purple-500"></i>
+          <span>Address Information</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label
+              for="houseNo"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >House No</label
+            >
+            <input
+              type="text"
+              id="houseNo"
+              formControlName="houseNo"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter house number"
+            />
+          </div>
+
+          <div>
+            <label
+              for="areaStreet"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Area/Street</label
+            >
+            <input
+              type="text"
+              id="areaStreet"
+              formControlName="areaStreet"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter area or street"
+            />
+          </div>
+
+          <div>
+            <label
+              for="state"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >State</label
+            >
+            <select
+              id="state"
+              formControlName="state"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+            >
+              <option value="">Select State</option>
+              <option value="maharashtra">Maharashtra</option>
+              <option value="karnataka">Karnataka</option>
+              <option value="tamil-nadu">Tamil Nadu</option>
+              <option value="delhi">Delhi</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              for="city"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >City</label
+            >
+            <select
+              id="city"
+              formControlName="city"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+            >
+              <option value="">Select City</option>
+              <option value="mumbai">Mumbai</option>
+              <option value="pune">Pune</option>
+              <option value="bangalore">Bangalore</option>
+              <option value="chennai">Chennai</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              for="pincode"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Pincode</label
+            >
+            <input
+              type="text"
+              id="pincode"
+              formControlName="pincode"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter pincode"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Items Carried Section -->
+      <div class="space-y-6">
+        <h3
+          class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+        >
+          <i class="fas fa-briefcase text-amber-500"></i>
+          <span>Items Carried</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <label
+              for="device"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Device</label
+            >
+            <input
+              type="text"
+              id="device"
+              formControlName="device"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="e.g., Laptop, Phone"
+            />
+          </div>
+
+          <div>
+            <label
+              for="maker"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Maker</label
+            >
+            <input
+              type="text"
+              id="maker"
+              formControlName="maker"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="e.g., Apple, Dell"
+            />
+          </div>
+
+          <div>
+            <label
+              for="serialNo"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Serial No</label
+            >
+            <input
+              type="text"
+              id="serialNo"
+              formControlName="serialNo"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter serial number"
+            />
+          </div>
+
+          <div>
+            <label
+              for="barcode"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Barcode</label
+            >
+            <input
+              type="text"
+              id="barcode"
+              formControlName="barcode"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Scan barcode"
+            />
+          </div>
+        </div>
+
+        <div class="flex justify-end">
+          <button
+            type="button"
+            (click)="addItem()"
+            class="flex items-center space-x-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105"
+          >
+            <i class="fas fa-plus"></i>
+            <span>Add Item</span>
+          </button>
+        </div>
+
+        <!-- Items List -->
+        <div *ngIf="itemsList.length > 0" class="mt-6">
+          <h4
+            class="text-md font-semibold text-gray-900 mb-4 flex items-center space-x-2"
+          >
+            <i class="fas fa-list text-blue-500"></i>
+            <span>Added Items ({{ itemsList.length }})</span>
+          </h4>
+
+          <div class="space-y-3">
+            <div
+              *ngFor="let item of itemsList"
+              class="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-200"
+            >
+              <div class="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                  <span class="text-xs text-gray-500 uppercase tracking-wide"
+                    >Device</span
+                  >
+                  <p class="text-sm font-medium text-gray-900">
+                    {{ item.device }}
+                  </p>
+                </div>
+                <div>
+                  <span class="text-xs text-gray-500 uppercase tracking-wide"
+                    >Maker</span
+                  >
+                  <p class="text-sm font-medium text-gray-900">
+                    {{ item.maker }}
+                  </p>
+                </div>
+                <div>
+                  <span class="text-xs text-gray-500 uppercase tracking-wide"
+                    >Serial No</span
+                  >
+                  <p class="text-sm font-medium text-gray-900">
+                    {{ item.serialNo }}
+                  </p>
+                </div>
+                <div>
+                  <span class="text-xs text-gray-500 uppercase tracking-wide"
+                    >Barcode</span
+                  >
+                  <p class="text-sm font-medium text-gray-900">
+                    {{ item.barcode }}
+                  </p>
+                </div>
+              </div>
+              <button
+                (click)="removeItem(item.id)"
+                class="ml-4 flex items-center space-x-1 px-3 py-1 rounded-lg bg-red-100 text-red-700 hover:bg-red-200 transition-colors duration-200"
+              >
+                <i class="fas fa-trash text-sm"></i>
+                <span class="text-xs">Remove</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 pt-6">
+        <button
+          type="submit"
+          [disabled]="greenChannelForm.invalid || isSubmitting"
+          class="flex-1 flex items-center justify-center space-x-2 px-6 py-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 text-white font-medium hover:from-green-700 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105"
+        >
+          <i *ngIf="isSubmitting" class="fas fa-spinner fa-spin"></i>
+          <i *ngIf="!isSubmitting" class="fas fa-user-plus"></i>
+          <span>{{ isSubmitting ? "Adding Visitor..." : "Add Visitor" }}</span>
+        </button>
+
+        <button
+          type="button"
+          (click)="resetForm()"
+          class="flex-1 flex items-center justify-center space-x-2 px-6 py-3 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-all duration-300"
+        >
+          <i class="fas fa-undo"></i>
+          <span>Reset Form</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

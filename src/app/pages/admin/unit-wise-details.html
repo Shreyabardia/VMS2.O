@@ -1,0 +1,461 @@
+<div class="space-y-6 animate-fade-in">
+  <!-- Page Header -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">
+        Unit Wise Admin & Customs Officer Details
+      </h1>
+      <p class="text-gray-600 mt-1">
+        Manage administrative and customs officer details by unit
+      </p>
+    </div>
+    <div class="mt-4 sm:mt-0 flex items-center space-x-2">
+      <button
+        routerLink="/admin/department-master"
+        class="flex items-center space-x-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105"
+      >
+        <i class="fas fa-building"></i>
+        <span>Department Master</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="glass-effect rounded-xl p-6 lg:p-8">
+    <!-- Add/Edit Form Section -->
+    <div class="space-y-8">
+      <div class="space-y-6">
+        <h3
+          class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+        >
+          <i class="fas fa-user-plus text-blue-500"></i>
+          <span>{{ isEditing ? "Edit" : "Add" }} Unit Admin Details</span>
+        </h3>
+
+        <form
+          [formGroup]="addEditForm"
+          (ngSubmit)="onSubmit()"
+          class="space-y-6"
+        >
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="col-span-1">
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Unit <span class="text-red-500">*</span></label
+              >
+              <select
+                formControlName="unit"
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              >
+                <option value="">Select Unit</option>
+                <option *ngFor="let item of unitOptions" [value]="item">
+                  {{ item }}
+                </option>
+              </select>
+            </div>
+            <div class="col-span-1">
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Designation <span class="text-red-500">*</span></label
+              >
+              <select
+                formControlName="designation"
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              >
+                <option value="">Select Designation</option>
+                <option *ngFor="let item of designationOptions" [value]="item">
+                  {{ item }}
+                </option>
+              </select>
+            </div>
+            <div class="col-span-1 sm:col-span-2 md:col-span-2"></div>
+            <div class="col-span-1">
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Name <span class="text-red-500">*</span></label
+              >
+              <input
+                type="text"
+                formControlName="name"
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                placeholder="Enter full name"
+              />
+            </div>
+            <div class="col-span-1">
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Email Address <span class="text-red-500">*</span></label
+              >
+              <input
+                type="email"
+                formControlName="emailAddress"
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                placeholder="Enter email address"
+              />
+            </div>
+            <div class="col-span-1 sm:col-span-2 md:col-span-2"></div>
+            <div class="col-span-1">
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Mobile Number <span class="text-red-500">*</span></label
+              >
+              <input
+                type="text"
+                formControlName="mobileNumber"
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                placeholder="Enter mobile number"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4 pt-6">
+            <button
+              type="submit"
+              [disabled]="addEditForm.invalid"
+              class="flex-1 flex items-center justify-center space-x-2 px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-medium hover:from-orange-600 hover:to-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105"
+            >
+              <i class="fas fa-save"></i>
+              <span>{{ isEditing ? "Update Details" : "Save Details" }}</span>
+            </button>
+            <button
+              type="button"
+              *ngIf="isEditing"
+              (click)="cancelEdit()"
+              class="flex-1 flex items-center justify-center space-x-2 px-6 py-3 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-all duration-300"
+            >
+              <i class="fas fa-times"></i>
+              <span>Cancel</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Details List Section -->
+      <div class="space-y-6">
+        <div class="flex items-center justify-between">
+          <h3
+            class="text-lg font-semibold text-gray-900 flex items-center space-x-2"
+          >
+            <i class="fas fa-list-alt text-green-500"></i>
+            <span>Unit Admin Details</span>
+          </h3>
+          <button
+            (click)="exportDetails()"
+            class="flex items-center space-x-2 px-4 py-2 rounded-xl bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105"
+          >
+            <i class="fas fa-file-export"></i>
+            <span>Export</span>
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                >
+                  Actions
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                >
+                  Unit Name
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                >
+                  Name
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                >
+                  Designation
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                >
+                  Email Address
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                >
+                  Mobile Number
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                >
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              [formGroup]="filterForm"
+              class="bg-white divide-y divide-gray-200"
+            >
+              <!-- Filter Row -->
+              <tr class="bg-gray-50">
+                <td class="px-6 py-3">
+                  <span class="text-sm text-gray-500">Actions</span>
+                </td>
+                <td class="px-6 py-3">
+                  <div class="relative">
+                    <input
+                      type="text"
+                      formControlName="unitName"
+                      placeholder="Filter Unit"
+                      class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
+                    />
+                    <button
+                      *ngIf="filterForm.get('unitName')?.value"
+                      (click)="clearFilter('unitName')"
+                      class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
+                    >
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </td>
+                <td class="px-6 py-3">
+                  <div class="relative">
+                    <input
+                      type="text"
+                      formControlName="name"
+                      placeholder="Filter Name"
+                      class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
+                    />
+                    <button
+                      *ngIf="filterForm.get('name')?.value"
+                      (click)="clearFilter('name')"
+                      class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
+                    >
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </td>
+                <td class="px-6 py-3">
+                  <div class="relative">
+                    <input
+                      type="text"
+                      formControlName="designation"
+                      placeholder="Filter Designation"
+                      class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
+                    />
+                    <button
+                      *ngIf="filterForm.get('designation')?.value"
+                      (click)="clearFilter('designation')"
+                      class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
+                    >
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </td>
+                <td class="px-6 py-3">
+                  <div class="relative">
+                    <input
+                      type="text"
+                      formControlName="emailAddresses"
+                      placeholder="Filter Email"
+                      class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
+                    />
+                    <button
+                      *ngIf="filterForm.get('emailAddresses')?.value"
+                      (click)="clearFilter('emailAddresses')"
+                      class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
+                    >
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </td>
+                <td class="px-6 py-3">
+                  <div class="relative">
+                    <input
+                      type="text"
+                      formControlName="mobileNumber"
+                      placeholder="Filter Mobile"
+                      class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
+                    />
+                    <button
+                      *ngIf="filterForm.get('mobileNumber')?.value"
+                      (click)="clearFilter('mobileNumber')"
+                      class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
+                    >
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </td>
+                <td class="px-6 py-3">
+                  <div class="relative">
+                    <select
+                      formControlName="status"
+                      class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
+                    >
+                      <option value="">All Status</option>
+                      <option
+                        *ngFor="let status of statusFilterOptions"
+                        [value]="status"
+                      >
+                        {{ status }}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- No Data Row -->
+              <ng-container *ngIf="(paginatedDetails$ | async)?.length === 0">
+                <tr>
+                  <td colspan="7" class="px-6 py-12 text-center">
+                    <div class="flex flex-col items-center space-y-3">
+                      <div
+                        class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center"
+                      >
+                        <i class="fas fa-user-tie text-gray-400 text-2xl"></i>
+                      </div>
+                      <div>
+                        <p class="text-gray-500 font-medium">
+                          No admin details found
+                        </p>
+                        <p class="text-gray-400 text-sm">
+                          No details match your criteria
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+
+              <!-- Data Rows -->
+              <ng-container
+                *ngFor="let detail of paginatedDetails$ | async; let i = index"
+              >
+                <tr class="hover:bg-gray-50 transition-colors duration-200">
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center space-x-2">
+                      <button
+                        (click)="editDetail(detail)"
+                        class="flex items-center space-x-1 px-3 py-1 rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors duration-200"
+                      >
+                        <i class="fas fa-edit text-sm"></i>
+                        <span class="text-xs">Edit</span>
+                      </button>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div
+                        class="w-8 h-8 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center"
+                      >
+                        <i class="fas fa-building text-white text-sm"></i>
+                      </div>
+                      <div class="ml-3">
+                        <div class="text-sm font-medium text-gray-900">
+                          {{ detail.unitName }}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div
+                        class="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center"
+                      >
+                        <span class="text-white text-sm font-medium">{{
+                          detail.name.charAt(0)
+                        }}</span>
+                      </div>
+                      <div class="ml-3">
+                        <div class="text-sm font-medium text-gray-900">
+                          {{ detail.name }}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">
+                      {{ detail.designation }}
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">
+                      {{ detail.emailAddresses }}
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">
+                      {{ detail.mobileNumber }}
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center space-x-3">
+                      <span
+                        class="status-badge"
+                        [ngClass]="{
+                          'bg-green-100 text-green-800':
+                            detail.activeInactive === 'Active',
+                          'bg-red-100 text-red-800':
+                            detail.activeInactive === 'Inactive',
+                        }"
+                        >{{ detail.activeInactive }}</span
+                      >
+                      <label class="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          [checked]="detail.status"
+                          (change)="toggleStatus(detail)"
+                          class="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                        />
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div
+          class="flex flex-col sm:flex-row justify-between items-center mt-6"
+          *ngIf="totalPages > 0"
+        >
+          <div class="flex items-center space-x-2 text-sm text-gray-600">
+            <span>Page {{ currentPage }} of {{ totalPages }}</span>
+            <span class="text-gray-400">|</span>
+            <span>{{ totalItems }} total units</span>
+          </div>
+          <div class="flex items-center space-x-1 sm:space-x-2 mt-4 sm:mt-0">
+            <button
+              (click)="previousPage()"
+              [disabled]="currentPage === 1"
+              class="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-sm"
+            >
+              <i class="fas fa-chevron-left text-sm"></i>
+              <span class="hidden sm:inline">Previous</span>
+            </button>
+            <div class="flex items-center space-x-1">
+              <ng-container *ngFor="let page of pages">
+                <button
+                  *ngIf="page !== '...'"
+                  (click)="goToPage(+page)"
+                  [class.bg-blue-600]="currentPage === page"
+                  [class.text-white]="currentPage === page"
+                  class="px-2 sm:px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-all duration-200 text-sm min-w-[2.5rem] sm:min-w-[2.75rem]"
+                >
+                  {{ page }}
+                </button>
+                <span
+                  *ngIf="page === '...'"
+                  class="px-2 sm:px-3 py-2 text-gray-400 text-sm"
+                  >...</span
+                >
+              </ng-container>
+            </div>
+            <button
+              (click)="nextPage()"
+              [disabled]="currentPage === totalPages"
+              class="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-sm"
+            >
+              <span class="hidden sm:inline">Next</span>
+              <i class="fas fa-chevron-right text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
