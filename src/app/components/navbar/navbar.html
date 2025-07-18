@@ -42,6 +42,93 @@
       border-radius: 1rem !important;
       box-shadow: 0px 2px 15px 0px rgba(0, 56, 255, 0.1) !important;
     }
+
+    /* Dropdown container: white card, rounded, soft shadow */
+    .navbar-dropdown {
+      background: #fff !important;
+      border-radius: 0.5rem !important;
+      box-shadow: 0px 4px 24px 0px rgba(0, 56, 255, 0.10) !important;
+      border: none !important;
+      padding: 12px 0;
+      min-width: 240px;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+    /* Dropdown sections: gap or border between groups */
+    .dropdown-section + .dropdown-section {
+      border-top: 1px solid #f0f4fa;
+      margin-top: 6px;
+      padding-top: 6px;
+    }
+    /* Dropdown item: blue bar on hover, subtle bg */
+    .dropdown-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px 10px 20px;
+      color: #222;
+      background: transparent;
+      border-radius: 0 !important;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+      font-size: 12px !important;
+    }
+    .dropdown-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      border-radius: 0;
+      background: #0560ff;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .dropdown-link {
+      padding-left: 24px;
+    }
+    /* Remove rounded corners on hover for dropdown items */
+    .dropdown-link:hover,
+    .dropdown-link:focus {
+      background: #eaf2ff !important;
+      color: #0560ff !important;
+      border-radius: 0 !important;
+    }
+    .dropdown-link:hover::before,
+    .dropdown-link:focus::before {
+      opacity: 1;
+    }
+    /* Divider between each dropdown-link except the first */
+    .navbar-dropdown .dropdown-link + .dropdown-link {
+      border-top: 1px solid #f0f4fa;
+      margin-top: 0;
+    }
+    .navbar-dropdown .dropdown-link:first-child {
+      border-top-left-radius: 0.5rem !important;
+      border-top-right-radius: 0.5rem !important;
+    }
+    .navbar-dropdown .dropdown-link:last-child {
+      border-bottom-left-radius: 0.5rem !important;
+      border-bottom-right-radius: 0.5rem !important;
+    }
+    .navbar-dropdown .dropdown-link:first-child::before {
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0;
+      width: 4px;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    .navbar-dropdown .dropdown-link:last-child::before {
+      border-bottom-left-radius: 0.5rem;
+      border-top-left-radius: 0;
+      width: 4px;
+      height: 100%;
+      left: 0;
+      bottom: 0;
+      top: 0;
+    }
   </style>
   <div class="w-full px-[25px] lg:py-2">
     <div class="flex flex-col items-start justify-start h-auto lg:flex-row lg:items-center lg:justify-center lg:h-10">
@@ -64,8 +151,7 @@
         </a>
 
         <!-- Visitor Registration Dropdown -->
-        <div class="relative group whitespace-nowrap text-sm navbar-hover-blue" routerLinkActive="navbar-active-blue"
-          (mouseenter)="mouseEnter('visitor-registration')" (mouseleave)="mouseLeave()">
+        <div class="relative group whitespace-nowrap text-sm navbar-hover-blue" routerLink="/visitor-registration" routerLinkActive="navbar-active-blue" [routerLinkActiveOptions]="{ exact: false }" (mouseenter)="mouseEnter('visitor-registration')" (mouseleave)="mouseLeave()">
           <button (click)="toggleDropdown('visitor-registration')"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 w-full text-left card-hover">
             <svg class="w-[26px] h-[26px] text-center" style="display: inline-block; vertical-align: middle"
@@ -91,20 +177,20 @@
             <span class="navbar-font">Visitor Registration</span>
           </button>
           <div *ngIf="openDropdown === 'visitor-registration'"
-            class="absolute z-20 mt-2 w-64 glass-effect rounded-xl shadow-xl py-2">
+            class="navbar-dropdown absolute z-20 mt-2 w-64 glass-effect shadow-xl py-2">
             <a routerLink="/visitor-registration/register"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-edit w-4 mr-3 text-blue-500"></i>Registration
             </a>
             <a routerLink="/visitor-registration/backside"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-undo w-4 mr-3 text-green-500"></i>Backside
             </a>
           </div>
         </div>
 
         <!-- Appointment Dropdown -->
-        <div class="relative group navbar-hover-blue" routerLinkActive="navbar-active-blue"
+        <div class="relative group navbar-hover-blue" routerLink="/appointment" routerLinkActive="navbar-active-blue" [routerLinkActiveOptions]="{ exact: false }"
           (mouseenter)="mouseEnter('appointment')" (mouseleave)="mouseLeave()">
           <button (click)="toggleDropdown('appointment')"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 w-full text-left card-hover">
@@ -122,20 +208,20 @@
             <span class="navbar-font">Appointment</span>
           </button>
           <div *ngIf="openDropdown === 'appointment'"
-            class="absolute z-20 mt-2 w-64 glass-effect rounded-xl shadow-xl py-2">
+            class="navbar-dropdown absolute z-20 mt-2 w-64 glass-effect shadow-xl py-2">
             <a routerLink="/appointment/schedule"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-clock w-4 mr-3 text-blue-500"></i>Schedule Appointment
             </a>
             <a routerLink="/appointment/view"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-eye w-4 mr-3 text-green-500"></i>View Appointment
             </a>
           </div>
         </div>
 
         <!-- Visitor List Dropdown -->
-        <div class="relative group whitespace-nowrap text-sm navbar-hover-blue" routerLinkActive="navbar-active-blue"
+        <div class="relative group whitespace-nowrap text-sm navbar-hover-blue" routerLink="/visitor-list" routerLinkActive="navbar-active-blue" [routerLinkActiveOptions]="{ exact: false }"
           (mouseenter)="mouseEnter('visitor-list')" (mouseleave)="mouseLeave()">
           <button (click)="toggleDropdown('visitor-list')"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 w-full text-left card-hover">
@@ -153,36 +239,36 @@
             <span class="navbar-font">Visitor List</span>
           </button>
           <div *ngIf="openDropdown === 'visitor-list'"
-            class="absolute z-20 mt-2 w-64 glass-effect rounded-xl shadow-xl py-2">
+            class="navbar-dropdown absolute z-20 mt-2 w-64 glass-effect shadow-xl py-2">
             <a routerLink="/visitor-list/checked-in"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-sign-in-alt w-4 mr-3 text-green-500"></i>Checked In Visitors
             </a>
             <a routerLink="/visitor-list/checked-out"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-sign-out-alt w-4 mr-3 text-red-500"></i>Checked Out Visitors
             </a>
             <a routerLink="/visitor-list/details"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-info-circle w-4 mr-3 text-blue-500"></i>Visitors Detail
             </a>
             <a routerLink="/visitor-list/history"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-history w-4 mr-3 text-purple-500"></i>Visitor History
             </a>
             <a routerLink="/visitor-list/ids"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-id-card w-4 mr-3 text-indigo-500"></i>Visitor IDs
             </a>
             <a routerLink="/visitor-list/items-carried"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-briefcase w-4 mr-3 text-orange-500"></i>Items Carried
             </a>
           </div>
         </div>
 
         <!-- Status Dropdown -->
-        <div class="relative group navbar-hover-blue" routerLinkActive="navbar-active-blue"
+        <div class="relative group navbar-hover-blue" routerLink="/status" routerLinkActive="navbar-active-blue" [routerLinkActiveOptions]="{ exact: false }"
           (mouseenter)="mouseEnter('status')" (mouseleave)="mouseLeave()">
           <button (click)="toggleDropdown('status')"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 w-full text-left card-hover">
@@ -199,20 +285,20 @@
             </svg>
             <span class="navbar-font">Status</span>
           </button>
-          <div *ngIf="openDropdown === 'status'" class="absolute z-20 mt-2 w-72 glass-effect rounded-xl shadow-xl py-2">
+          <div *ngIf="openDropdown === 'status'" class="navbar-dropdown absolute z-20 mt-2 w-72 glass-effect shadow-xl py-2">
             <a routerLink="/status/visitor-appointment"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-calendar-check w-4 mr-3 text-blue-500"></i>Visitor Appointment Status
             </a>
             <a routerLink="/status/on-gate"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-door-open w-4 mr-3 text-green-500"></i>On Gate Status
             </a>
           </div>
         </div>
 
         <!-- Blacklist Dropdown -->
-        <div class="relative group navbar-hover-blue" routerLinkActive="navbar-active-blue"
+        <div class="relative group navbar-hover-blue" routerLink="/blacklist" routerLinkActive="navbar-active-blue" [routerLinkActiveOptions]="{ exact: false }"
           (mouseenter)="mouseEnter('blacklist')" (mouseleave)="mouseLeave()">
           <button (click)="toggleDropdown('blacklist')"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 w-full text-left card-hover">
@@ -230,20 +316,20 @@
             <span class="navbar-font">Blacklist</span>
           </button>
           <div *ngIf="openDropdown === 'blacklist'"
-            class="absolute z-20 mt-2 w-64 glass-effect rounded-xl shadow-xl py-2">
+            class="navbar-dropdown absolute z-20 mt-2 w-64 glass-effect shadow-xl py-2">
             <a routerLink="/blacklist/add"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-user-times w-4 mr-3 text-red-500"></i>Blacklist Visitor
             </a>
             <a routerLink="/blacklist/view"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-list-alt w-4 mr-3 text-red-500"></i>View Blacklist
             </a>
           </div>
         </div>
 
         <!-- Admin Dropdown -->
-        <div class="relative group navbar-hover-blue" routerLinkActive="navbar-active-blue"
+        <div class="relative group navbar-hover-blue" routerLink="/admin" routerLinkActive="navbar-active-blue" [routerLinkActiveOptions]="{ exact: false }"
           (mouseenter)="mouseEnter('admin')" (mouseleave)="mouseLeave()">
           <button (click)="toggleDropdown('admin')"
             class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 transition-all duration-300 w-full text-left card-hover">
@@ -261,41 +347,41 @@
             <span class="navbar-font">Admin</span>
           </button>
           <div *ngIf="openDropdown === 'admin'"
-            class="absolute z-20 right-0 mt-2 w-72 glass-effect rounded-xl shadow-xl py-2">
+            class="navbar-dropdown absolute z-20 right-0 mt-2 w-72 glass-effect shadow-xl py-2">
             <a routerLink="/admin/add-user"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-user-plus w-4 mr-3 text-blue-500"></i>Add User
             </a>
             <a routerLink="/admin/edit-user"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-user-edit w-4 mr-3 text-green-500"></i>Edit User
             </a>
             <a routerLink="/admin/change-password"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-key w-4 mr-3 text-orange-500"></i>Change Password
             </a>
             <a routerLink="/admin/add-role"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-user-tag w-4 mr-3 text-purple-500"></i>Add Role
             </a>
             <a routerLink="/admin/edit-role"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-edit w-4 mr-3 text-indigo-500"></i>Edit Role
             </a>
             <a routerLink="/admin/unit-wise-details"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-building w-4 mr-3 text-blue-500"></i>Unit Wise Admin Details
             </a>
             <a routerLink="/admin/add-employee"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-user-tie w-4 mr-3 text-green-500"></i>Add Employee
             </a>
             <a routerLink="/admin/appointment-approval"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-check-double w-4 mr-3 text-orange-500"></i>Appointment Status Approval
             </a>
             <a routerLink="/admin/department-master"
-              class="block px-4 py-3 text-sm text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-sitemap w-4 mr-3 text-purple-500"></i>Department Master
             </a>
           </div>
@@ -465,7 +551,7 @@
                 </linearGradient>
               </defs>
               <path fill="url(#visitor-list-gradient-mobile)"
-                d="M4 7a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2H5a1 1 0 0 1-1-1m5 0a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2h-9a1 1 0 0 1-1-1m-5 5a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1m5 0a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2h-9a1 1 0 0 1-1-1m-5 5a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1m5 0a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2h-9a1 1 0 0 1-1-1m-5 5a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1m5 0a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2h-9a1 1 0 0 1-1-1m-5 5a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1m5 0a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2h-9a1 1 0 0 1-1-1m-5 5a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1m5 0a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2h-9a1 1 0 0 1-1-1m-5 5a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1m5 0a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2h-9a1 1 0 0 1-1-1" />
+                d="M4 7a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2H5a1 1 0 0 1-1-1m5 0a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2h-9a1 1 0 0 1-1-1m-5 5a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1m5 0a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2h-9a1 1 0 0 1-1-1m-5 5a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1m5 0a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2h-9a1 1 0 0 1-1-1m-5 5a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1m5 0a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2h-9a1 1 0 0 1-1-1" />
             </svg>
             <span>Visitor List</span>
           </div>
