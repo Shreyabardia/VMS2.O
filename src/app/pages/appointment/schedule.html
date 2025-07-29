@@ -316,6 +316,38 @@
               <option value="Analyst">Analyst</option>
             </select>
           </div>
+          <div>
+            <label
+              for="profession"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >Profession</label>
+            <input
+              type="text"
+              id="profession"
+              formControlName="profession"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter profession"
+            />
+          </div>
+          <div>
+            <label for="typeOfVisitor" class="block text-sm font-medium text-gray-700 mb-2">Type of Visitor</label>
+            <select
+              id="typeOfVisitor"
+              formControlName="typeOfVisitor"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+            >
+              <option value="">Select Type</option>
+              <option value="Customer">Customer</option>
+              <option value="Supplier">Supplier</option>
+              <option value="Local Authority">Local Authority</option>
+              <option value="Government Official">Government Official</option>
+              <option value="Consulate">Consulate</option>
+              <option value="Employee Relatives / Personal / Guest">Employee Relatives / Personal / Guest</option>
+              <option value="Regulatory / Statutory">Regulatory / Statutory</option>
+              <option value="Armed Officer">Armed Officer</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -329,6 +361,21 @@
         </h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label
+              for="appointmentWith"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Appointment With *</label
+            >
+            <input
+              type="text"
+              id="appointmentWith"
+              formControlName="appointmentWith"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              placeholder="Enter name of person for appointment"
+            />
+          </div>
+
           <div>
             <label
               for="appointmentFromDate"
@@ -437,16 +484,16 @@
 
           <div>
             <label
-              for="meeting"
+              for="numberOfVisitors"
               class="block text-sm font-medium text-gray-700 mb-2"
-              >Meeting Purpose *</label
-            >
+            >Number of Visitors *</label>
             <input
-              type="text"
-              id="meeting"
-              formControlName="meeting"
+              type="number"
+              id="numberOfVisitors"
+              formControlName="numberOfVisitors"
               class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
-              placeholder="Enter meeting purpose"
+              placeholder="Enter number of visitors"
+              min="1"
             />
           </div>
 

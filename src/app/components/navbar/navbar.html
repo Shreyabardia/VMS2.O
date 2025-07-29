@@ -186,6 +186,10 @@
               class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-undo w-4 mr-3 text-green-500"></i>Backside
             </a>
+            <a routerLink="/visitor-registration/gate-pass"
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
+              <i class="fas fa-id-card w-4 mr-3 text-blue-500"></i>Visitor Gate Pass
+            </a>
           </div>
         </div>
 
@@ -216,6 +220,10 @@
             <a routerLink="/appointment/view"
               class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-eye w-4 mr-3 text-green-500"></i>View Appointment
+            </a>
+            <a routerLink="/appointment/on-my-approvals"
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
+              <i class="fas fa-user-check w-4 mr-3 text-indigo-500"></i>On My Approvals
             </a>
           </div>
         </div>
@@ -256,6 +264,10 @@
               class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-history w-4 mr-3 text-purple-500"></i>Visitor History
             </a>
+            <a routerLink="/visitor-list/monthly-list"
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
+              <i class="fas fa-calendar-alt w-4 mr-3 text-orange-500"></i>Monthly Visitor List
+            </a>
             <a routerLink="/visitor-list/ids"
               class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-id-card w-4 mr-3 text-indigo-500"></i>Visitor IDs
@@ -293,6 +305,10 @@
             <a routerLink="/status/on-gate"
               class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
               <i class="fas fa-door-open w-4 mr-3 text-green-500"></i>On Gate Status
+            </a>
+            <a routerLink="/status/on-gate-appointment-status"
+              class="dropdown-link text-sm text-black transition-colors" (click)="openDropdown = null">
+              <i class="fas fa-clipboard-list w-4 mr-3 text-blue-500"></i>On Gate & Appointment Status
             </a>
           </div>
         </div>
@@ -501,6 +517,10 @@
             class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-undo w-4 mr-3 text-green-500"></i>Backside
           </a>
+          <a routerLink="/visitor-registration/gate-pass" (click)="closeMobileMenu()"
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-id-card w-4 mr-3 text-blue-500"></i>Visitor Gate Pass
+          </a>
         </div>
       </div>
 
@@ -533,6 +553,10 @@
           <a routerLink="/appointment/view" (click)="closeMobileMenu()"
             class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-eye w-4 mr-3 text-green-500"></i>View Appointment
+          </a>
+          <a routerLink="/appointment/on-my-approvals" (click)="closeMobileMenu()"
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-user-check w-4 mr-3 text-indigo-500"></i>On My Approvals
           </a>
         </div>
       </div>
@@ -575,6 +599,10 @@
             class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-history w-4 mr-3 text-purple-500"></i>Visitor History
           </a>
+          <a routerLink="/visitor-list/monthly-list" (click)="closeMobileMenu()"
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-calendar-alt w-4 mr-3 text-orange-500"></i>Monthly Visitor List
+          </a>
           <a routerLink="/visitor-list/ids" (click)="closeMobileMenu()"
             class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-id-card w-4 mr-3 text-indigo-500"></i>Visitor IDs
@@ -615,6 +643,10 @@
           <a routerLink="/status/on-gate" (click)="closeMobileMenu()"
             class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
             <i class="fas fa-door-open w-4 mr-3 text-green-500"></i>On Gate Status
+          </a>
+          <a routerLink="/status/on-gate-appointment-status" (click)="closeMobileMenu()"
+            class="block px-4 py-2 rounded-lg text-base font-medium text-black hover:bg-blue-50 hover:text-blue-700 transition-colors">
+            <i class="fas fa-clipboard-list w-4 mr-3 text-blue-500"></i>On Gate & Appointment Status
           </a>
         </div>
       </div>

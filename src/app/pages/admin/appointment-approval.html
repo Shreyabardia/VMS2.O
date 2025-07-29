@@ -47,11 +47,6 @@
             <th
               class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
             >
-              Actions
-            </th>
-            <th
-              class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-            >
               Name
             </th>
             <th
@@ -67,7 +62,7 @@
             <th
               class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
             >
-              Meeting
+              Appointment With
             </th>
             <th
               class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
@@ -89,6 +84,11 @@
             >
               Unit Name
             </th>
+            <th
+              class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+            >
+              View Details
+            </th>
           </tr>
         </thead>
         <tbody
@@ -98,142 +98,71 @@
           <!-- Filter Row -->
           <tr class="bg-gray-50">
             <td class="px-6 py-3">
-              <span class="text-sm text-gray-500">Actions</span>
-            </td>
-            <td class="px-6 py-3">
               <div class="relative">
-                <input
-                  type="text"
-                  formControlName="name"
-                  placeholder="Filter Name"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="pendingFilterForm.get('name')?.value"
-                  (click)="clearPendingFilter('name')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
+                <input type="text" formControlName="name" placeholder="Filter Name" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm" />
+                <button *ngIf="pendingFilterForm.get('name')?.value" (click)="clearPendingFilter('name')" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
             </td>
             <td class="px-6 py-3">
               <div class="relative">
-                <input
-                  type="text"
-                  formControlName="mobileNo"
-                  placeholder="Filter Mobile"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="pendingFilterForm.get('mobileNo')?.value"
-                  (click)="clearPendingFilter('mobileNo')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
+                <input type="text" formControlName="mobileNo" placeholder="Filter Mobile" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm" />
+                <button *ngIf="pendingFilterForm.get('mobileNo')?.value" (click)="clearPendingFilter('mobileNo')" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
             </td>
             <td class="px-6 py-3">
               <div class="relative">
-                <input
-                  type="text"
-                  formControlName="nationality"
-                  placeholder="Filter Nationality"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="pendingFilterForm.get('nationality')?.value"
-                  (click)="clearPendingFilter('nationality')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
+                <input type="text" formControlName="nationality" placeholder="Filter Nationality" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm" />
+                <button *ngIf="pendingFilterForm.get('nationality')?.value" (click)="clearPendingFilter('nationality')" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
             </td>
             <td class="px-6 py-3">
               <div class="relative">
-                <input
-                  type="text"
-                  formControlName="meeting"
-                  placeholder="Filter Meeting"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="pendingFilterForm.get('meeting')?.value"
-                  (click)="clearPendingFilter('meeting')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
+                <input type="text" formControlName="appointmentWith" placeholder="Filter Appointment With" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm" />
+                <button *ngIf="pendingFilterForm.get('appointmentWith')?.value" (click)="clearPendingFilter('appointmentWith')" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
             </td>
             <td class="px-6 py-3">
               <div class="relative">
-                <input
-                  type="date"
-                  formControlName="date"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="pendingFilterForm.get('date')?.value"
-                  (click)="clearPendingFilter('date')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
+                <input type="date" formControlName="date" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm" />
+                <button *ngIf="pendingFilterForm.get('date')?.value" (click)="clearPendingFilter('date')" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
             </td>
             <td class="px-6 py-3">
               <div class="relative">
-                <input
-                  type="text"
-                  formControlName="company"
-                  placeholder="Filter Company"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="pendingFilterForm.get('company')?.value"
-                  (click)="clearPendingFilter('company')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
+                <input type="text" formControlName="company" placeholder="Filter Company" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm" />
+                <button *ngIf="pendingFilterForm.get('company')?.value" (click)="clearPendingFilter('company')" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
             </td>
             <td class="px-6 py-3">
               <div class="relative">
-                <input
-                  type="text"
-                  formControlName="status"
-                  placeholder="Filter Status"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="pendingFilterForm.get('status')?.value"
-                  (click)="clearPendingFilter('status')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
+                <input type="text" formControlName="status" placeholder="Filter Status" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm" />
+                <button *ngIf="pendingFilterForm.get('status')?.value" (click)="clearPendingFilter('status')" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
             </td>
             <td class="px-6 py-3">
               <div class="relative">
-                <input
-                  type="text"
-                  formControlName="unitName"
-                  placeholder="Filter Unit"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="pendingFilterForm.get('unitName')?.value"
-                  (click)="clearPendingFilter('unitName')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
+                <input type="text" formControlName="unitName" placeholder="Filter Unit" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm" />
+                <button *ngIf="pendingFilterForm.get('unitName')?.value" (click)="clearPendingFilter('unitName')" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
+            </td>
+            <td class="px-6 py-3">
+              <span class="text-sm text-gray-500">View</span>
             </td>
           </tr>
 
@@ -266,67 +195,23 @@
           >
             <tr class="hover:bg-gray-50 transition-colors duration-200">
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center space-x-2">
-                  <button
-                    (click)="viewPendingDetails(item)"
-                    class="flex items-center space-x-1 px-3 py-1 rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors duration-200"
-                  >
-                    <i class="fas fa-eye text-sm"></i>
-                    <span class="text-xs">Details</span>
-                  </button>
-                  <button
-                    (click)="approvePending(item)"
-                    class="flex items-center space-x-1 px-3 py-1 rounded-lg bg-green-100 text-green-700 hover:bg-green-200 transition-colors duration-200"
-                  >
-                    <i class="fas fa-check text-sm"></i>
-                    <span class="text-xs">Approve</span>
-                  </button>
-                </div>
+                <div class="text-sm text-gray-900">{{ item.name }}</div>
               </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.mobileNo }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.nationality }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.appointmentWith }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.date }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.company }}</td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div
-                    class="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center"
-                  >
-                    <span class="text-white text-sm font-medium">{{
-                      item.name.charAt(0)
-                    }}</span>
-                  </div>
-                  <div class="ml-3">
-                    <div class="text-sm font-medium text-gray-900">
-                      {{ item.name }}
-                    </div>
-                  </div>
-                </div>
+                <span class="status-badge" [ngClass]="{
+                  'bg-yellow-100 text-yellow-800': item.status === 'Pending',
+                  'bg-blue-100 text-blue-800': item.status === 'Approved',
+                  'bg-red-100 text-red-800': item.status === 'Rejected',
+                }">{{ item.status }}</span>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {{ item.mobileNo }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {{ item.nationality }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {{ item.meeting }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {{ item.date }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {{ item.company }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span
-                  class="status-badge"
-                  [ngClass]="{
-                    'bg-yellow-100 text-yellow-800': item.status === 'Pending',
-                    'bg-blue-100 text-blue-800': item.status === 'Approved',
-                    'bg-red-100 text-red-800': item.status === 'Rejected',
-                  }"
-                  >{{ item.status }}</span
-                >
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {{ item.unitName }}
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.unitName }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-center">
+                <button class="text-blue-600 hover:underline font-medium">View</button>
               </td>
             </tr>
           </ng-container>
@@ -407,36 +292,12 @@
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
           <tr>
-            <th
-              class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-            >
-              Actions
-            </th>
-            <th
-              class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-            >
-              Name
-            </th>
-            <th
-              class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-            >
-              Mobile No
-            </th>
-            <th
-              class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-            >
-              Meeting
-            </th>
-            <th
-              class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-            >
-              Company
-            </th>
-            <th
-              class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-            >
-              Status
-            </th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Visitor Name</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Mobile Number</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Appointment With</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Company Name</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">View Details</th>
           </tr>
         </thead>
         <tbody
@@ -446,92 +307,47 @@
           <!-- Filter Row -->
           <tr class="bg-gray-50">
             <td class="px-6 py-3">
-              <span class="text-sm text-gray-500">Actions</span>
-            </td>
-            <td class="px-6 py-3">
               <div class="relative">
-                <input
-                  type="text"
-                  formControlName="visitorName"
-                  placeholder="Filter Name"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="onGateFilterForm.get('visitorName')?.value"
-                  (click)="clearOnGateFilter('visitorName')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
+                <input type="text" formControlName="visitorName" placeholder="Filter Visitor Name" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm" />
+                <button *ngIf="onGateFilterForm.get('visitorName')?.value" (click)="clearOnGateFilter('visitorName')" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
             </td>
             <td class="px-6 py-3">
               <div class="relative">
-                <input
-                  type="text"
-                  formControlName="mobileNumber"
-                  placeholder="Filter Mobile"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="onGateFilterForm.get('mobileNumber')?.value"
-                  (click)="clearOnGateFilter('mobileNumber')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
+                <input type="text" formControlName="mobileNumber" placeholder="Filter Mobile Number" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm" />
+                <button *ngIf="onGateFilterForm.get('mobileNumber')?.value" (click)="clearOnGateFilter('mobileNumber')" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
             </td>
             <td class="px-6 py-3">
               <div class="relative">
-                <input
-                  type="text"
-                  formControlName="meeting"
-                  placeholder="Filter Meeting"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="onGateFilterForm.get('meeting')?.value"
-                  (click)="clearOnGateFilter('meeting')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
+                <input type="text" formControlName="appointmentWith" placeholder="Filter Appointment With" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm" />
+                <button *ngIf="onGateFilterForm.get('appointmentWith')?.value" (click)="clearOnGateFilter('appointmentWith')" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
             </td>
             <td class="px-6 py-3">
               <div class="relative">
-                <input
-                  type="text"
-                  formControlName="companyName"
-                  placeholder="Filter Company"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="onGateFilterForm.get('companyName')?.value"
-                  (click)="clearOnGateFilter('companyName')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
+                <input type="text" formControlName="companyName" placeholder="Filter Company Name" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm" />
+                <button *ngIf="onGateFilterForm.get('companyName')?.value" (click)="clearOnGateFilter('companyName')" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
             </td>
             <td class="px-6 py-3">
               <div class="relative">
-                <input
-                  type="text"
-                  formControlName="status"
-                  placeholder="Filter Status"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="onGateFilterForm.get('status')?.value"
-                  (click)="clearOnGateFilter('status')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
+                <input type="text" formControlName="status" placeholder="Filter Status" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm" />
+                <button *ngIf="onGateFilterForm.get('status')?.value" (click)="clearOnGateFilter('status')" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
+            </td>
+            <td class="px-6 py-3">
+              <span class="text-sm text-gray-500">View</span>
             </td>
           </tr>
 
@@ -563,59 +379,19 @@
             *ngFor="let item of paginatedOnGate$ | async; let i = index"
           >
             <tr class="hover:bg-gray-50 transition-colors duration-200">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.visitorName }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.mobileNumber }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.appointmentWith }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.companyName }}</td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center space-x-2">
-                  <button
-                    (click)="viewOnGateDetails(item)"
-                    class="flex items-center space-x-1 px-3 py-1 rounded-lg bg-purple-100 text-purple-700 hover:bg-purple-200 transition-colors duration-200"
-                  >
-                    <i class="fas fa-eye text-sm"></i>
-                    <span class="text-xs">Details</span>
-                  </button>
-                  <button
-                    (click)="approveOnGate(item)"
-                    class="flex items-center space-x-1 px-3 py-1 rounded-lg bg-green-100 text-green-700 hover:bg-green-200 transition-colors duration-200"
-                  >
-                    <i class="fas fa-check text-sm"></i>
-                    <span class="text-xs">Approve</span>
-                  </button>
-                </div>
+                <span class="status-badge" [ngClass]="{
+                  'bg-yellow-100 text-yellow-800': item.status === 'Pending',
+                  'bg-blue-100 text-blue-800': item.status === 'Approved',
+                  'bg-red-100 text-red-800': item.status === 'Rejected',
+                }">{{ item.status }}</span>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div
-                    class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center"
-                  >
-                    <span class="text-white text-sm font-medium">{{
-                      item.visitorName.charAt(0)
-                    }}</span>
-                  </div>
-                  <div class="ml-3">
-                    <div class="text-sm font-medium text-gray-900">
-                      {{ item.visitorName }}
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {{ item.mobileNumber }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {{ item.meeting }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {{ item.companyName }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span
-                  class="status-badge"
-                  [ngClass]="{
-                    'bg-yellow-100 text-yellow-800': item.status === 'Pending',
-                    'bg-blue-100 text-blue-800': item.status === 'Approved',
-                    'bg-red-100 text-red-800': item.status === 'Rejected',
-                  }"
-                  >{{ item.status }}</span
-                >
+              <td class="px-6 py-4 whitespace-nowrap text-center">
+                <button class="text-blue-600 hover:underline font-medium">View</button>
               </td>
             </tr>
           </ng-container>

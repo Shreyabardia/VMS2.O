@@ -100,11 +100,6 @@
             >
               Status
             </th>
-            <th
-              class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-            >
-              Gate Pass
-            </th>
           </tr>
         </thead>
         <tbody
@@ -184,29 +179,12 @@
                 </button>
               </div>
             </td>
-            <td class="px-6 py-3">
-              <div class="relative">
-                <input
-                  type="text"
-                  formControlName="gatePass"
-                  placeholder="Filter Gate Pass"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm"
-                />
-                <button
-                  *ngIf="filterForm.get('gatePass')?.value"
-                  (click)="clearFilter('gatePass')"
-                  class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600"
-                >
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </td>
           </tr>
 
           <!-- No Data Row -->
           <ng-container *ngIf="(paginatedApprovals$ | async)?.length === 0">
             <tr>
-              <td colspan="7" class="px-6 py-12 text-center">
+              <td colspan="5" class="px-6 py-12 text-center">
                 <div class="flex flex-col items-center space-y-3">
                   <div
                     class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center"
@@ -272,11 +250,6 @@
                   }"
                   >{{ approval.status }}</span
                 >
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-gray-900">
-                  {{ approval.gatePass }}
-                </div>
               </td>
             </tr>
           </ng-container>

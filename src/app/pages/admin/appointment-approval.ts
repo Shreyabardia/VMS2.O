@@ -41,7 +41,7 @@ export class AppointmentApprovalComponent implements OnInit {
       name: [''],
       mobileNo: [''],
       nationality: [''],
-      meeting: [''],
+      appointmentWith: [''],
       date: [''],
       company: [''],
       status: [''],
@@ -51,7 +51,7 @@ export class AppointmentApprovalComponent implements OnInit {
     this.onGateFilterForm = this.fb.group({
       visitorName: [''],
       mobileNumber: [''],
-      meeting: [''],
+      appointmentWith: [''],
       companyName: [''],
       status: [''],
       viewDetails: [''],
@@ -112,12 +112,12 @@ export class AppointmentApprovalComponent implements OnInit {
         name: `Visitor ${i + 1}`,
         mobileNo: `90000000${i + 1}`,
         nationality: 'Indian',
-        meeting: `Employee ${i + 1}`,
+        appointmentWith: `Employee ${i + 1}`,
         date: '2024-06-01',
         company: `Company ${i + 1}`,
         status: 'Pending',
         unitName: `Unit ${(i % 3) + 1}`,
-        viewDetails: '',
+        viewDetails: 'View',
       })),
     );
   }
@@ -126,10 +126,10 @@ export class AppointmentApprovalComponent implements OnInit {
       Array.from({ length: 7 }, (_, i) => ({
         visitorName: `GateVisitor ${i + 1}`,
         mobileNumber: `80000000${i + 1}`,
-        meeting: `Employee ${i + 1}`,
+        appointmentWith: `Employee ${i + 1}`,
         companyName: `Company ${i + 1}`,
         status: 'Pending',
-        viewDetails: '',
+        viewDetails: 'View',
       })),
     );
   }

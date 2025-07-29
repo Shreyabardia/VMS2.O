@@ -5,9 +5,11 @@ import {
   Input,
   Output,
   EventEmitter,
+  OnInit,
 } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService, User } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,17 +17,25 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
   imports: [CommonModule, RouterLink, RouterLinkActive, NgClass],
   templateUrl: './navbar.html',
 })
-export class Navbar {
+export class Navbar implements OnInit {
   @Input() isMobileMenuOpen = false;
   @Output() closeMenu = new EventEmitter<void>();
   openDropdown: string | null = null;
+  currentUser: User | null = null;
 
   private leaveTimeout: any;
 
   constructor(
     private elementRef: ElementRef,
     private router: Router,
+    private authService: AuthService,
   ) {}
+
+  ngOnInit(): void {
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
+  }
 
   toggleDropdown(dropdown: string) {
     if (this.openDropdown === dropdown) {
@@ -58,9 +68,6 @@ export class Navbar {
   }
 
   logout() {
-    // TODO: Implement logout logic
-    console.log('Logout clicked from navbar');
-    // Example: Navigate to login page after logout
-    // this.router.navigate(['/login']);
+    this.authService.logout();
   }
 }

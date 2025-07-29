@@ -1,0 +1,97 @@
+<div class="space-y-6 animate-fade-in">
+  <!-- Note Section -->
+  <div class="glass-effect rounded-xl p-6 border-l-4 border-red-400">
+    <div class="font-bold text-red-600 mb-1">Note :</div>
+    <ul class="list-disc pl-5 text-gray-700 text-sm space-y-1">
+      <li>Ensure that there is a clear business purpose to the visit</li>
+      <li>Verify the nationality of the visitor. In case the visitor is not an indian national, forward the passport and visa copy of the visitor to the compliance office for verification</li>
+      <li>Ensure that the visitor has signed the EAR declaration form on the backside of the VMS pass and the visitor guide is provided to the visitor</li>
+      <li>Accompany the visitor at all times while inside the facility</li>
+      <li>Ensure that the visitor does not access technical information</li>
+      <li>Ensure that no form of photography/videography is done by the visitor</li>
+    </ul>
+  </div>
+
+  <!-- On Gate Status Section -->
+  <div class="glass-effect rounded-xl p-6">
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">On Gate Status</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">#</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Company Name</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Phone No</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
+          </tr>
+          <tr class="bg-gray-50" [formGroup]="onGateFilterForm">
+            <td class="px-6 py-3"></td>
+            <td class="px-6 py-3"><input type="text" placeholder="Filter Name" formControlName="name" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm" /></td>
+            <td class="px-6 py-3"><input type="text" placeholder="Filter Company" formControlName="companyName" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm" /></td>
+            <td class="px-6 py-3"><input type="text" placeholder="Filter Phone" formControlName="phoneNo" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm" /></td>
+            <td class="px-6 py-3"><input type="text" placeholder="Filter Status" formControlName="status" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm" /></td>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngIf="filteredOnGateData.length === 0">
+            <td colspan="5" class="px-6 py-12 text-center text-gray-400 font-medium">No data to display</td>
+          </tr>
+          <tr *ngFor="let row of filteredOnGateData; let i = index">
+            <td class="px-6 py-4 whitespace-nowrap">{{ i + 1 }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ row.name }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ row.companyName }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ row.phoneNo }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ row.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Appointments Status Section -->
+  <div class="glass-effect rounded-xl p-6">
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">Appointments Status</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">#</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Mobile No</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Appointment With</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Nationality</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Unit Name</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Approver</th>
+          </tr>
+          <tr class="bg-gray-50" [formGroup]="appointmentFilterForm">
+            <td class="px-6 py-3"></td>
+            <td class="px-6 py-3"><input type="text" placeholder="Filter Name" formControlName="name" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm" /></td>
+            <td class="px-6 py-3"><input type="text" placeholder="Filter Mobile" formControlName="mobileNo" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm" /></td>
+            <td class="px-6 py-3"><input type="text" placeholder="Filter Appointment With" formControlName="appointmentWith" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm" /></td>
+            <td class="px-6 py-3"><input type="text" placeholder="Filter Nationality" formControlName="nationality" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm" /></td>
+            <td class="px-6 py-3"><input type="text" placeholder="Filter Status" formControlName="status" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm" /></td>
+            <td class="px-6 py-3"><input type="text" placeholder="Filter Unit Name" formControlName="unitName" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm" /></td>
+            <td class="px-6 py-3"><input type="text" placeholder="Filter Approver" formControlName="approver" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm" /></td>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngIf="filteredAppointmentData.length === 0">
+            <td colspan="8" class="px-6 py-12 text-center text-gray-400 font-medium">No data to display</td>
+          </tr>
+          <tr *ngFor="let row of filteredAppointmentData; let i = index">
+            <td class="px-6 py-4 whitespace-nowrap">{{ i + 1 }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ row.name }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ row.mobileNo }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ row.appointmentWith }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ row.nationality }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ row.status }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ row.unitName }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ row.approver }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div> 

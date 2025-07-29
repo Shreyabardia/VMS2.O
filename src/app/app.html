@@ -1,14 +1,23 @@
 <div class="app-bg"></div>
 <div class="min-h-screen">
+  <!-- Header and Navbar - only show when not on login page -->
+  <div *ngIf="!isLoginPage">
   <app-header (toggleMenu)="toggleMobileMenu()"></app-header>
   <app-navbar
     [isMobileMenuOpen]="isMobileMenuOpen"
     (closeMenu)="isMobileMenuOpen = false"
   ></app-navbar>
+  </div>
 
   <!-- Main content with enhanced styling -->
-  <main class="flex-1 p-4 sm:p-6 lg:p-8 animate-fade-in">
-    <div class="max-w-7xl mx-auto">
+  <main [ngClass]="{
+    'flex-1 p-4 sm:p-6 lg:p-8 animate-fade-in': !isLoginPage,
+    'flex-1': isLoginPage
+  }">
+    <div [ngClass]="{
+      'max-w-7xl mx-auto': !isLoginPage,
+      'w-full': isLoginPage
+    }">
       <router-outlet></router-outlet>
     </div>
   </main>

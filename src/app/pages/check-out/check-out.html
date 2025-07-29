@@ -98,6 +98,24 @@
               </div>
             </div>
           </div>
+
+          <!-- Visitor Details Card (Barcode) - Always visible -->
+          <div class="glass-effect rounded-xl p-4 border border-blue-400 mt-6 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <div class="text-xs font-medium text-gray-500">Name of the Visitor</div>
+                <div class="text-base font-semibold text-gray-900">{{ visitorDetails?.name || '-' }}</div>
+              </div>
+              <div>
+                <div class="text-xs font-medium text-gray-500">Check In At</div>
+                <div class="text-base font-semibold text-gray-900">{{ visitorDetails?.checkInTime || '-' }}</div>
+              </div>
+              <div>
+                <div class="text-xs font-medium text-gray-500">From Where</div>
+                <div class="text-base font-semibold text-gray-900">{{ visitorDetails?.from || '-' }}</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div *ngIf="searchType?.value === 'visitorName'" class="space-y-4">
@@ -129,6 +147,24 @@
               >
                 <i class="fas fa-search"></i>
               </button>
+            </div>
+          </div>
+
+          <!-- Visitor Details Card (Name) - Always visible -->
+          <div class="glass-effect rounded-xl p-4 border border-blue-400 mt-6 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <div class="text-xs font-medium text-gray-500">Name of the Visitor</div>
+                <div class="text-base font-semibold text-gray-900">{{ visitorDetails?.name || '-' }}</div>
+              </div>
+              <div>
+                <div class="text-xs font-medium text-gray-500">Check In At</div>
+                <div class="text-base font-semibold text-gray-900">{{ visitorDetails?.checkInTime || '-' }}</div>
+              </div>
+              <div>
+                <div class="text-xs font-medium text-gray-500">From Where</div>
+                <div class="text-base font-semibold text-gray-900">{{ visitorDetails?.from || '-' }}</div>
+              </div>
             </div>
           </div>
         </div>
